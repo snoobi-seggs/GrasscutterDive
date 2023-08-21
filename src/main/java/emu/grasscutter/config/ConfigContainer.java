@@ -29,9 +29,11 @@ public class ConfigContainer {
      * Version  9 - 'limits' was added for handbook requests.
      * Version 10 - 'trialCostumes' was added for enabling costumes
      *              on trial avatars.
+	 * Version 11 - 'isColorConsole' was added to make the console colored
+	 *				beautifully like Thoronium zaddy (linux users might die, windows only)
      */
     private static int version() {
-        return 10;
+        return 11;
     }
 
     /**
@@ -170,6 +172,8 @@ public class ConfigContainer {
         public boolean isShowPacketPayload = false;
         /* Show annoying loop packets or no */
         public boolean isShowLoopPackets = false;
+		/* Color Console */
+		public boolean isColorConsole = false;
 
         public boolean cacheSceneEntitiesEveryRun = false;
 

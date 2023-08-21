@@ -113,11 +113,11 @@ public class DataLoader {
 
             if (filenames == null) {
                 Grasscutter.getLogger().error("We were unable to locate your default data files.");
-            } // else for (Path file : filenames) {
-            //     String relativePath = String.valueOf(file).split("defaults[\\\\\\/]data[\\\\\\/]")[1];
+            } else for (Path file : filenames) {
+                String relativePath = String.valueOf(file).split("defaults[\\\\\\/]data[\\\\\\/]")[1];
 
-            //     checkAndCopyData(relativePath);
-            // }
+                checkAndCopyData(relativePath);
+            }
         } catch (Exception e) {
             Grasscutter.getLogger().error("An error occurred while trying to check the data folder.", e);
         }

@@ -31,7 +31,11 @@ public class PacketGetPlayerFriendListRsp extends BasePacket {
                         .setNameCardId(serverAccount.nameCardId)
                         .setOnlineState(FriendOnlineState.FRIEND_ONLINE_STATE_ONLINE)
                         .setParam(1)
+						//.setAvatarId(serverAccount.avatarId)
+						//.setFriendEnterHomeOption(FriendEnterHomeOptionOuterClass.FriendEnterHomeOption.FRIEND_ENTER_HOME_OPTION_REFUSE)
                         .setIsGameSource(true)
+						.setIsInDuel(true)
+						.setIsDuelObservable(true)
                         .setPlatformType(PlatformTypeOuterClass.PlatformType.PLATFORM_TYPE_PC)
                         .build();
 

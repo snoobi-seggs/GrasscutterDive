@@ -51,14 +51,21 @@ spotless {
     }
 }
 
-compileJava.options.encoding = 'UTF-8'
+compileJava {
+	options.encoding = "UTF-8"
+	options.fork = 'true'
+	options.forkOptions.with {
+		memoryMaximumSize = "5000m"
+	}
+}
+
 compileTestJava.options.encoding = 'UTF-8'
 
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
 group = 'io.grasscutter'
-version = '1.7.0'
+version = '4.0.0'
 
 java {
     withJavadocJar()
@@ -385,17 +392,17 @@ tasks.register('generateHandbook') {
         }
 
         // Build the handbook.
-        exec {
-            workingDir 'src/handbook'
-            commandLine npm, 'run', 'build'
-        }
+        //exec {
+        //    workingDir 'src/handbook'
+        //    commandLine npm, 'run', 'build'
+        //}
 
         // Copy the handbook from /dist to /src/main/resources.
-        copy {
-            from 'src/handbook/dist/index.html'
-            into 'src/main/resources/html'
-            rename 'index.html', 'handbook.html'
-        }
+        //copy {
+        //    from 'src/handbook/dist/index.html'
+        //    into 'src/main/resources/html'
+        //    rename 'index.html', 'handbook.html'
+        //}
     }
 }
 

@@ -12,6 +12,7 @@ import emu.grasscutter.game.quest.enums.*;
 import emu.grasscutter.net.proto.RetcodeOuterClass.Retcode;
 import emu.grasscutter.scripts.data.ScriptArgs;
 import emu.grasscutter.server.packet.send.*;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,16 +27,16 @@ public final class PlayerProgressManager extends BasePlayerDataManager {
     // Set of open states that are never unlocked, whether they fulfill the conditions or not.
     public static final Set<Integer> BLACKLIST_OPEN_STATES =
             Set.of(
-                    48 // blacklist OPEN_STATE_LIMIT_REGION_GLOBAL to make Meledy happy. =D Remove this as
+                    //48 // blacklist OPEN_STATE_LIMIT_REGION_GLOBAL to make Meledy happy. =D Remove this as
                     // soon as quest unlocks are fully implemented.
                     );
 
     public static final Set<Integer> IGNORED_OPEN_STATES =
             Set.of(
-                    1404, // OPEN_STATE_MENGDE_INFUSEDCRYSTAL, causes quest 'Mine Craft' to be given to the
+                    1404 // OPEN_STATE_MENGDE_INFUSEDCRYSTAL, causes quest 'Mine Craft' to be given to the
                     // player at the start of the game.
                     // This should be removed when city reputation is implemented.
-                    57 // OPEN_STATE_PERSONAL_LINE, causes the prompt for showing character hangout quests to
+                    //57 // OPEN_STATE_PERSONAL_LINE, causes the prompt for showing character hangout quests to
                     // be permanently shown.
                     // This should be removed when character story quests are implemented.
                     );
@@ -57,6 +58,16 @@ public final class PlayerProgressManager extends BasePlayerDataManager {
                                                                     c.getCondType() == OpenStateCondType.OPEN_STATE_OFFERING_LEVEL
                                                                             || c.getCondType()
                                                                                     == OpenStateCondType.OPEN_STATE_CITY_REPUTATION_LEVEL))
+											// Beginner Barrier around Monstadt
+											|| s.getId() == 47
+											// QoL (questNavigate, gacha, mapBoundary, eventsTab, oldVaranaraArea)
+											|| List.of(2,31,48,49,1403,3003).contains(s.getId())
+											// TEAPOT
+											|| List.of(77,78,83,1500,1501,1503,1504,1505).contains(s.getId())
+											// HANDBOOK
+											|| List.of(1100,1101,1102,1103,1104,2801).contains(s.getId())
+											// SHOPS
+											|| List.of(900,901,902,903,1001,1002,1003,1004,1005,1006,1007,1008,1009,1010,1011,1012,1013).contains(s.getId())
                                             // Always unlock OPEN_STATE_PAIMON, otherwise the player will not have a
                                             // working chat.
                                             || s.getId() == 1)

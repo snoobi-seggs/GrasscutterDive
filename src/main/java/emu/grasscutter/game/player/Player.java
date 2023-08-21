@@ -1515,7 +1515,7 @@ public class Player implements PlayerHook, FieldFetch {
         int min = this.getPropertyMin(prop);
         int max = this.getPropertyMax(prop);
         if (min <= value && value <= max) {
-            int currentValue = this.properties.get(prop.getId());
+            int currentValue = this.properties.getOrDefault(prop.getId(), 0);	//only happens when new props are set to old accounts while they are still online
             this.properties.put(prop.getId(), value);
             if (sendPacket) {
                 // Send property change reasons if needed.

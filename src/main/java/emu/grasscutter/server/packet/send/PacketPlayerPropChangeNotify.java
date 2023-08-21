@@ -13,8 +13,24 @@ public class PacketPlayerPropChangeNotify extends BasePacket {
 
         this.buildHeader(0);
 
-        PlayerPropChangeNotify proto =
-                PlayerPropChangeNotify.newBuilder().setPropType(prop.getId()).setPropDelta(delta).build();
+        PlayerPropChangeNotify proto = PlayerPropChangeNotify.newBuilder()
+										.setPropType(prop.getId())
+										.setPropDelta(delta)
+										.build();
+
+        this.setData(proto);
+    }
+	
+	// test command
+	public PacketPlayerPropChangeNotify(int propId, int propVal) {
+        super(PacketOpcodes.PlayerPropChangeNotify);
+
+        this.buildHeader(0);
+
+        PlayerPropChangeNotify proto = PlayerPropChangeNotify.newBuilder()
+										.setPropType(propId)
+										.setPropDelta(propVal)
+										.build();
 
         this.setData(proto);
     }

@@ -91,8 +91,24 @@ public class GameSession implements GameSessionManager.KcpChannel {
     }
 
     public void logPacket(String sendOrRecv, int opcode, byte[] payload) {
-        Grasscutter.getLogger()
-                .info(sendOrRecv + ": " + PacketOpcodesUtils.getOpcodeName(opcode) + " (" + opcode + ")");
+		// Make console text beautiful like Thoronium zaddy (in config) :D
+		if (GAME_INFO.isColorConsole) {
+			// Build String
+			StringBuilder finalStr = new StringBuilder();
+			
+			// sendOrRecv opCodeName (opcode)
+			finalStr.append(new ColorText(sendOrRecv + ": ", sendOrRecv.equals("RECV") ? "BRIGHT_CYAN" : "BRIGHT_GREEN").toString());
+			finalStr.append(new ColorText(PacketOpcodesUtils.getOpcodeName(opcode), sendOrRecv.equals("RECV") ? "BRIGHT_BLUE" : "DARK_GREEN").toString());
+			finalStr.append(new ColorText(" (" + opcode + ")", "BRIGHT_YELLOW").toString());
+			
+			// Finally, log
+			Grasscutter.getLogger().info(finalStr.toString());
+		} else {
+			// Boring White
+			Grasscutter.getLogger()
+                .info(sendOrRecv + " : " + PacketOpcodesUtils.getOpcodeName(opcode) + " (" + opcode + ")");
+		}		
+		// Print out payload hex data if config says so
         if (GAME_INFO.isShowPacketPayload) System.out.println(Utils.bytesToHex(payload));
     }
 

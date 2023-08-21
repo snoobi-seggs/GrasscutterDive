@@ -22,7 +22,7 @@ public final class GameConstants {
     public static final int BATTLE_PASS_POINT_PER_WEEK = 10000;
     public static final int BATTLE_PASS_LEVEL_PRICE = 150;
     public static final int BATTLE_PASS_CURRENT_INDEX = 2;
-    // Default entity ability hashes.
+    // Default entity ability hashes. (avatar)
     public static final String[] DEFAULT_ABILITY_STRINGS = {
         "Avatar_DefaultAbility_VisionReplaceDieInvincible",
         "Avatar_DefaultAbility_AvartarInShaderChange",
@@ -32,15 +32,55 @@ public final class GameConstants {
         "Avatar_Component_Initializer",
         "Avatar_FallAnthem_Achievement_Listener",
         "GrapplingHookSkill_Ability",
-        "Avatar_PlayerBoy_DiveStamina_Reduction",
-        "Ability_Avatar_Dive_Team",
-        "Ability_Avatar_Dive_SealEcho",
-        "Absorb_SealEcho_Bullet_01",
-        "Absorb_SealEcho_Bullet_02",
-        "Ability_Avatar_Dive_CrabShield",
-        "ActivityAbility_Absorb_Shoot",
-        "SceneAbility_DiveVolume"
+		
+		//4.0 diving
+        //"Avatar_PlayerBoy_DiveStamina_Reduction",
+        //"Ability_Avatar_Dive_Team",
+        //"Ability_Avatar_Dive_SealEcho",
+        //"Absorb_SealEcho_Bullet_01",
+        //"Absorb_SealEcho_Bullet_02",
+        //"Ability_Avatar_Dive_CrabShield",
+        //"ActivityAbility_Absorb_Shoot",
+        "SceneAbility_DiveVolume",
+		
+		// Team
+		"Ability_Avatar_Dive_Team", //(THIS SHLD HAVE BEEN IN TEAM)
+		
+		// Crab Shield
+		"Ability_Avatar_Dive_CrabShield",
+		"Avatar_Absorb_TrackingMissile",
+		//"Avatar_Dive_CrabShield_HitBox",
+		//"Avatar_Dive_CrabShield_HitBox_Long",
+		//"Absorb_CrabShield_Back_Bullet_01",
+		//"Absorb_CrabShield_Back_Bullet_02",
+		//"Avatar_Dive_Lock_Collider_Driver_CrabShield",
+
+		// Seal Echo
+		"Ability_Avatar_Dive_SealEcho",
+		//"Absorb_SealEcho_Bullet_01",
+		//"Absorb_SealEcho_Bullet_02",
+		
+		// Sword Fish 2 charge thingy
+		"Avatar_Absorb_SwordFishSlash",
+		
+		// Flat fish thingy
+		"Ability_Avatar_Dive_Seahorse_Spray_Baihe",
+
+		// Activity
+		"ActivityAbility_Absorb_Shoot",
+		"Activity_MagicWave_SkillButton"
+		//"ActivityAbility_Absorb_Avatar_Gadget",
+		//"ActivityAbility_Absorb_Bullet",
+		//"ActivityAbility_Absorb_Avatar_Gadget_2",
+		//"ActivityAbility_Absorb_Avatar_Gadget_3",
+		//"ActivityAbility_Absorb_Avatar_Gadget_4",
+		//"ActivityAbility_Absorb_Abandon"
     };
+	
+	public static final String[] DEFAULT_TEAM_ABILITY_STRINGS = {
+		"Ability_Avatar_Dive_Team"	//(FONTAINE)
+	};
+	
     public static final SparseSet ILLEGAL_WEAPONS = new SparseSet("""
         10000-10008, 11411, 11506-11508, 12505, 12506, 12508, 12509,
         13503, 13506, 14411, 14503, 14505, 14508, 15504-15506
@@ -53,6 +93,7 @@ public final class GameConstants {
         105001, 105004, 106000-107000, 107011, 108000, 109000-110000,
         115000-130000, 200200-200899, 220050, 220054
         """);
+		
     public static final int[] DEFAULT_ABILITY_HASHES =
             Arrays.stream(DEFAULT_ABILITY_STRINGS).mapToInt(Utils::abilityHash).toArray();
     public static final int DEFAULT_ABILITY_NAME = Utils.abilityHash("Default");
