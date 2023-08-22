@@ -336,6 +336,9 @@ public final class GameData {
 
     @Getter
     private static final Int2ObjectMap<SceneData> sceneDataMap = new Int2ObjectLinkedOpenHashMap<>();
+	
+	@Getter
+    private static final Int2ObjectMap<SceneTagData> sceneTagDataMap = new Int2ObjectLinkedOpenHashMap<>();
 
     @Getter
     private static final Int2ObjectMap<TalkConfigData> talkConfigDataMap =

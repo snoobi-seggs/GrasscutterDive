@@ -16,6 +16,7 @@ public class EntityTeam extends GameEntity {
 
     public EntityTeam(Player player) {
         super(player.getScene());
+		this.player = player;
         initAbilities();
         this.id = player.getWorld().getNextEntityId(EntityIdType.TEAM);
     }
