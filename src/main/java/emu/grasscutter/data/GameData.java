@@ -271,6 +271,12 @@ public final class GameData {
 
     @Getter private static final Int2ObjectMap<ItemData> itemDataMap = new Int2ObjectOpenHashMap<>();
 
+	@Getter
+    private static final Int2ObjectMap<MapLayerData> mapLayerDataMap = new Int2ObjectOpenHashMap<>();
+
+	@Getter
+    private static final Int2ObjectMap<MapLayerGroupData> mapLayerGroupDataMap = new Int2ObjectOpenHashMap<>();
+
     @Getter
     private static final Int2ObjectMap<MonsterCurveData> monsterCurveDataMap =
             new Int2ObjectOpenHashMap<>();
