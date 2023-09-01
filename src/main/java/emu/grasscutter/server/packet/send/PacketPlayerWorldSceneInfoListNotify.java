@@ -28,9 +28,6 @@ public class PacketPlayerWorldSceneInfoListNotify extends BasePacket {
 																.filter(sceneTag -> sceneTag.isDefaultValid() || sceneTag.getCond().get(0).getCondType() != null)
 																.map(SceneTagData::getId)
 																.toList())
-                                        //.addSceneTagIdList(102)  // Jade chamber (alr added)
-                                        //.addSceneTagIdList(113)
-                                        //.addSceneTagIdList(117)
                                         //.addSceneTagIdList(1093) // 3.0 Vana_real
                                         .addSceneTagIdList(1094)   // 3.0 Vana_dream
                                         //.addSceneTagIdList(1095) // 3.0 Vana_first
@@ -41,7 +38,7 @@ public class PacketPlayerWorldSceneInfoListNotify extends BasePacket {
                                         .addSceneTagIdList(1166)   // Desert Pyramid (CWL_Trans_02)
 										.setMapLayerInfo(MapLayerInfo.newBuilder()
 															.addAllUnlockedMapLayerIdList(GameData.getMapLayerDataMap().values().stream().map(MapLayerData::getId).toList())	// MapLayer Ids
-															//.addAllDIDEMJFOGLD(List.of())	// i rly dk wtf is this
+															//.addAllDIDEMJFOGLD(List.of())	// i rly dk wtf is this, maybe map base floor id
 															.addAllUnlockedMapLayerGroupIdList(GameData.getMapLayerGroupDataMap().values().stream().map(MapLayerGroupData::getId).toList())		// will show MapLayer options when hovered over
 															.build())	//map layer test
                                         .build())

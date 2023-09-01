@@ -1,3 +1,12 @@
+# WINDY
+PacketWindSeedType1Notify.java
+WindSeedType1NotifyOuterClass.java
+WindyCommand.java
+WindSeedType1Notify.proto
+LuaScripts/
+WindyScripts/
+luac.exe
+
 # Compiled class file
 *.class
 
@@ -54,6 +63,7 @@ tmp/
 # Grasscutter
 /cache
 /resources
+/resourcesOLD
 /logs
 /plugins
 /data

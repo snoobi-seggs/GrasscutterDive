@@ -38,4 +38,18 @@ public class PacketAddNoGachaAvatarCardNotify extends BasePacket {
 
         this.setData(proto);
     }
+	
+	public PacketAddNoGachaAvatarCardNotify(int avatarId, ActionReason reason, int itemId) {
+		super(PacketOpcodes.AddNoGachaAvatarCardNotify, true);
+
+		AddNoGachaAvatarCardNotify proto = AddNoGachaAvatarCardNotify.newBuilder()
+				.setAvatarId(avatarId)
+				.setReason(reason.getValue())
+				.setInitialLevel(1)
+				.setItemId(itemId)
+				.setInitialPromoteLevel(0)
+				.build();
+
+		this.setData(proto);
+	}
 }

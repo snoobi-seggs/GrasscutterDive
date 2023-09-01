@@ -75,6 +75,8 @@ public enum EntityType implements IntValueEnum {
     Screen(64),
     EchoShell(65),
     UIInteractGadget(66),
+	Partner(70),
+	DeshretObeliskGadget(71),
     Region(98),
     PlaceHolder(99);
 

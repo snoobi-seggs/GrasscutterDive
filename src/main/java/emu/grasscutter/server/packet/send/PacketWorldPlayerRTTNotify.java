@@ -24,4 +24,24 @@ public class PacketWorldPlayerRTTNotify extends BasePacket {
 
         this.setData(proto);
     }
+	
+	// test command
+	public PacketWorldPlayerRTTNotify(World world, boolean isTestCommand) {
+        super(PacketOpcodes.WorldPlayerRTTNotify);
+
+        WorldPlayerRTTNotify.Builder proto = WorldPlayerRTTNotify.newBuilder();
+
+        for (Player player : world.getPlayers()) {
+            proto.addPlayerRttList(
+                    PlayerRTTInfo.newBuilder()
+                            .setUid(player.getUid())
+                            .setRtt(10) // TODO - put player ping here
+                    );
+        }
+		
+		// add musik bot
+		proto.addPlayerRttList(PlayerRTTInfo.newBuilder().setUid(69420).setRtt(10));
+
+        this.setData(proto);
+    }
 }

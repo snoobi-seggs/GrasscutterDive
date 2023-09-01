@@ -24,8 +24,11 @@ public final class WeatherCommand implements CommandHandler {
 
         if (args.isEmpty()) {
             climate = targetPlayer.getClimate();
+			//toggle
+			targetPlayer.setLockedWeather(targetPlayer.isLockedWeather() ? false : true);
             CommandHandler.sendTranslatedMessage(
                     sender, "commands.weather.status", weatherId, climate.getShortName());
+			CommandHandler.sendMessage(sender, "Weather Lock Set To : " + targetPlayer.isLockedWeather());
             return;
         }
 

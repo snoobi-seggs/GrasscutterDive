@@ -48,6 +48,10 @@ public enum MaterialType {
     MATERIAL_ACTIVITY_GEAR(39),
     MATERIAL_ACTIVITY_JIGSAW(40),
     MATERIAL_ARANARA(41),
+	MATERIAL_GCG_CARD(42),
+	MATERIAL_GCG_CARD_FACE(43),
+	MATERIAL_GCG_CARD_BACK(44),
+	MATERIAL_GCG_FIELD(45),
     MATERIAL_DESHRET_MANUAL(46);
 
     private static final Int2ObjectMap<MaterialType> map = new Int2ObjectOpenHashMap<>();

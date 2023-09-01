@@ -32,52 +32,44 @@ public final class GameConstants {
         "Avatar_Component_Initializer",
         "Avatar_FallAnthem_Achievement_Listener",
         "GrapplingHookSkill_Ability",
-		
-		//4.0 diving
-        //"Avatar_PlayerBoy_DiveStamina_Reduction",
-        //"Ability_Avatar_Dive_Team",
-        //"Ability_Avatar_Dive_SealEcho",
-        //"Absorb_SealEcho_Bullet_01",
-        //"Absorb_SealEcho_Bullet_02",
-        //"Ability_Avatar_Dive_CrabShield",
-        //"ActivityAbility_Absorb_Shoot",
         "SceneAbility_DiveVolume",
 		
 		// Team
 		"Ability_Avatar_Dive_Team", //(THIS SHLD HAVE BEEN IN TEAM)
-		
 		// Crab Shield
 		"Ability_Avatar_Dive_CrabShield",
 		"Avatar_Absorb_TrackingMissile",
-		//"Avatar_Dive_CrabShield_HitBox",
-		//"Avatar_Dive_CrabShield_HitBox_Long",
-		//"Absorb_CrabShield_Back_Bullet_01",
-		//"Absorb_CrabShield_Back_Bullet_02",
-		//"Avatar_Dive_Lock_Collider_Driver_CrabShield",
-
 		// Seal Echo
 		"Ability_Avatar_Dive_SealEcho",
-		//"Absorb_SealEcho_Bullet_01",
-		//"Absorb_SealEcho_Bullet_02",
-		
 		// Sword Fish 2 charge thingy
 		"Avatar_Absorb_SwordFishSlash",
-		
 		// Flat fish thingy
 		"Ability_Avatar_Dive_Seahorse_Spray_Baihe",
+		
+		// TEST NADA
+		"Monster_Nada_MuteFollowEffect",
+		"Gagana_GrapplingHookSkill",
+		"Gagana_AvatarAimShoot",
+		"Monster_Nada_ForceAvatarExitFocus",
+		
 
 		// Activity
 		"ActivityAbility_Absorb_Shoot",
 		"Activity_MagicWave_SkillButton"
-		//"ActivityAbility_Absorb_Avatar_Gadget",
-		//"ActivityAbility_Absorb_Bullet",
-		//"ActivityAbility_Absorb_Avatar_Gadget_2",
-		//"ActivityAbility_Absorb_Avatar_Gadget_3",
-		//"ActivityAbility_Absorb_Avatar_Gadget_4",
-		//"ActivityAbility_Absorb_Abandon"
     };
 	
 	public static final String[] DEFAULT_TEAM_ABILITY_STRINGS = {
+		//TEST NADA
+		"Monster_Nada_CreateGagana",
+		"Gagana_ActivateCircle_Electric",
+		"Gagana_ActivateCircle_Fire",
+		"Gagana_ActivateCircle_Ice",
+		"Gagana_ActivateCircle_Wind",
+		"Gagana_ActivateCircle_Water",
+		"Gagana_ActivateCircle_Electric_Mirror",
+		"Gagana_ActivateAimShoot",
+		
+		//DIVING
 		"Ability_Avatar_Dive_Team"	//(FONTAINE)
 	};
 	

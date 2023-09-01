@@ -4,6 +4,7 @@ import dev.morphia.annotations.*;
 import emu.grasscutter.GameConstants;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.data.GameData;
+import emu.grasscutter.data.common.WeatherArea;
 import emu.grasscutter.data.excels.PlayerLevelData;
 import emu.grasscutter.data.excels.world.WeatherData;
 import emu.grasscutter.database.DatabaseHelper;
@@ -51,7 +52,7 @@ import emu.grasscutter.game.tower.TowerManager;
 import emu.grasscutter.game.world.Position;
 import emu.grasscutter.game.world.Scene;
 import emu.grasscutter.game.world.World;
-import emu.grasscutter.net.packet.BasePacket;
+import emu.grasscutter.net.packet.*;
 import emu.grasscutter.net.proto.AbilityInvokeEntryOuterClass.AbilityInvokeEntry;
 import emu.grasscutter.net.proto.AttackResultOuterClass.AttackResult;
 import emu.grasscutter.net.proto.CombatInvokeEntryOuterClass.CombatInvokeEntry;
@@ -153,6 +154,7 @@ public class Player implements PlayerHook, FieldFetch {
     @Transient @Getter private ClimateType climate = ClimateType.CLIMATE_SUNNY;
     @Transient @Getter private int areaId = 0;
     @Transient @Getter private int areaType = 0;
+	@Transient @Getter @Setter private boolean isLockedWeather = false;
 
     // Player managers go here
     @Getter private transient AvatarStorage avatars;
@@ -423,11 +425,15 @@ public class Player implements PlayerHook, FieldFetch {
         this.session.send(new PacketSceneAreaWeatherNotify(this));
     }
 
-    public synchronized void setWeather(int weather) {
-        this.setWeather(weather, ClimateType.CLIMATE_NONE);
+    public synchronized void setWeather(int weatherId) {
+        this.setWeather(weatherId, ClimateType.CLIMATE_NONE);
     }
 
     public synchronized void setWeather(int weatherId, ClimateType climate) {
+        this.setWeather(weatherId, climate, 0f);
+    }
+	
+	synchronized public void setWeather(int weatherId, ClimateType climate, float transDuration) {
         // Lookup default climate for this weather
         if (climate == ClimateType.CLIMATE_NONE) {
             WeatherData w = GameData.getWeatherDataMap().get(weatherId);
@@ -437,7 +443,7 @@ public class Player implements PlayerHook, FieldFetch {
         }
         this.weatherId = weatherId;
         this.climate = climate;
-        this.session.send(new PacketSceneAreaWeatherNotify(this));
+        this.session.send(new PacketSceneAreaWeatherNotify(this, transDuration));
     }
 
     /**
@@ -1251,7 +1257,66 @@ public class Player implements PlayerHook, FieldFetch {
         this.getHome().updateHourlyResources(this);
 
         this.getQuestManager().onTick();
+		
+		//check weather area
+		this.checkWeatherArea();
     }
+	
+	public synchronized void checkWeatherArea() {
+		//banned weathers idk why some so shit
+		List<Integer> bannedWeatherIds = new ArrayList(List.of(4060,4059,4109));
+		
+		//rn only scene 3 & check if quest locked weather
+		if (this.sceneId == 3 && !isLockedWeather) {
+			Position pos = getPosition();
+			int maxPriorityWeather = 0;
+			for (WeatherArea weatherArea : GameData.getWeatherAreasMap().values()) {
+				//in range of area & not banned weather
+				if (weatherArea.contains(this.getPosition().getX(), this.getPosition().getZ()) &&
+					this.getPosition().getY() >= weatherArea.getBottom() &&
+					this.getPosition().getY() <= weatherArea.getTop() &&
+					!bannedWeatherIds.contains(weatherArea.getAreaId())) {
+						WeatherData weatherData = GameData.getWeatherDataMap().get(weatherArea.getAreaId());
+						//not null and is higher priority
+						if (weatherData == null) {
+							//log error
+							Grasscutter.getLogger().warn("WEATHER {} is not found in WeatherExcels",weatherArea.getAreaId());
+							bannedWeatherIds.add(weatherArea.getAreaId());
+							continue;
+						}
+						if (maxPriorityWeather == 0) {
+							maxPriorityWeather = weatherArea.getAreaId();
+						}
+						if (weatherData.getPriority() > GameData.getWeatherDataMap().get(maxPriorityWeather).getPriority()) {
+							maxPriorityWeather = weatherArea.getAreaId();
+						}
+				}
+			}
+			//debug
+			//Grasscutter.getLogger().warn("matched weathers : {}, current weather : {}",weathers.toString(), this.weatherId);
+			//Grasscutter.getLogger().warn("maxPriorityWeather : {}",maxPriorityWeather);
+			
+			//at this point, if weather area == 0 still, is in new region old weather area
+			if (maxPriorityWeather == 0 && this.weatherId != 0) {
+				this.setWeather(maxPriorityWeather, ClimateType.CLIMATE_NONE, 3.0f);
+				return;
+			}
+			
+			//if weather is new, and or climate is diff
+			if (this.weatherId != maxPriorityWeather || GameData.getWeatherDataMap().get(maxPriorityWeather).getDefaultClimate() != this.climate) {
+				Grasscutter.getLogger().warn("SET PLAYER {} WEATHER TO {}",this.getUid(),maxPriorityWeather);
+				this.setWeather(maxPriorityWeather, ClimateType.CLIMATE_NONE, 3.0f); //official mimics taking 3s to weather change
+			}
+		} else {
+			//change to 0 if is mismatch sceneID
+			WeatherData weatherData = GameData.getWeatherDataMap().get(this.weatherId);
+			if (weatherData != null && this.weatherId != 0) {
+				if (weatherData.getSceneID() != this.sceneId) {
+					this.setWeather(0, ClimateType.CLIMATE_NONE, 3.0f);
+				}
+			}
+		}
+	}
 
     private synchronized void doDailyReset() {
         // Check if we should execute a daily reset on this tick.
@@ -1387,6 +1452,9 @@ public class Player implements PlayerHook, FieldFetch {
         session.send(new PacketQuestGlobalVarNotify(this));
         session.send(new PacketCodexDataFullNotify(this));
         session.send(new PacketAllWidgetDataNotify(this));
+        session.send(new PacketPlayerInvestigationAllInfoNotify(this));	//handbook mission, gcg, embattle
+		session.send(new BasePacket(PacketOpcodes.CoopDataNotify));
+		session.send(new BasePacket(PacketOpcodes.AllCoopInfoNotify));
 
         //Achievements
         this.achievements.onLogin(this);
@@ -1394,6 +1462,7 @@ public class Player implements PlayerHook, FieldFetch {
         session.send(new PacketWidgetGadgetAllDataNotify());
         session.send(new PacketCombineDataNotify(this.unlockedCombines));
         session.send(new PacketGetChatEmojiCollectionRsp(this.getChatEmojiIdList()));
+		
         this.forgingManager.sendForgeDataNotify();
         this.resinManager.onPlayerLogin();
         this.cookingManager.sendCookDataNotify();

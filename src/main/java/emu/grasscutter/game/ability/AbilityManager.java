@@ -556,10 +556,10 @@ public final class AbilityManager extends BasePlayerManager {
         var killState = AbilityMetaSetKilledState.parseFrom(invoke.getAbilityData());
         if (killState.getKilled()) {
             scene.killEntity(entity);
-        } else if (!entity.isAlive()) {
-            entity.setFightProperty(
-                    FightProperty.FIGHT_PROP_CUR_HP,
-                    entity.getFightProperty(FightProperty.FIGHT_PROP_MAX_HP));
+        } else if (!entity.isAlive()) {	//wtf is this
+            //entity.setFightProperty(
+            //        FightProperty.FIGHT_PROP_CUR_HP,
+            //        entity.getFightProperty(FightProperty.FIGHT_PROP_MAX_HP));
         }
     }
 

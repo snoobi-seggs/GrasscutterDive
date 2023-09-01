@@ -791,6 +791,7 @@ public final class TeamManager extends BasePlayerDataManager {
         EntityAvatar deadAvatar = this.getCurrentAvatarEntity();
 
         if (deadAvatar.isAlive() || deadAvatar.getId() != dieGuid) {
+			Grasscutter.getLogger().warn("[FAIL] AVATAR_DIE {DEBUG: IS_ALIVE -> {}, DEAD_AVATAR_ID -> {}, DIE_GUID -> {}} \nFIGHT PROPS: {}", deadAvatar.isAlive(), deadAvatar.getId(), dieGuid, deadAvatar.getFightProperties());
             return;
         }
 

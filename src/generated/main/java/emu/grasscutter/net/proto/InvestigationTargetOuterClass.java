@@ -171,40 +171,40 @@ public final class InvestigationTargetOuterClass {
     public enum State
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>INVALID = 0;</code>
+       * <code>STATE_INVALID = 0;</code>
        */
-      INVALID(0),
+      STATE_INVALID(0),
       /**
-       * <code>IN_PROGRESS = 1;</code>
+       * <code>STATE_IN_PROGRESS = 1;</code>
        */
-      IN_PROGRESS(1),
+      STATE_IN_PROGRESS(1),
       /**
-       * <code>COMPLETE = 2;</code>
+       * <code>STATE_COMPLETE = 2;</code>
        */
-      COMPLETE(2),
+      STATE_COMPLETE(2),
       /**
-       * <code>REWARD_TAKEN = 3;</code>
+       * <code>STATE_REWARD_TAKEN = 3;</code>
        */
-      REWARD_TAKEN(3),
+      STATE_REWARD_TAKEN(3),
       UNRECOGNIZED(-1),
       ;
 
       /**
-       * <code>INVALID = 0;</code>
+       * <code>STATE_INVALID = 0;</code>
        */
-      public static final int INVALID_VALUE = 0;
+      public static final int STATE_INVALID_VALUE = 0;
       /**
-       * <code>IN_PROGRESS = 1;</code>
+       * <code>STATE_IN_PROGRESS = 1;</code>
        */
-      public static final int IN_PROGRESS_VALUE = 1;
+      public static final int STATE_IN_PROGRESS_VALUE = 1;
       /**
-       * <code>COMPLETE = 2;</code>
+       * <code>STATE_COMPLETE = 2;</code>
        */
-      public static final int COMPLETE_VALUE = 2;
+      public static final int STATE_COMPLETE_VALUE = 2;
       /**
-       * <code>REWARD_TAKEN = 3;</code>
+       * <code>STATE_REWARD_TAKEN = 3;</code>
        */
-      public static final int REWARD_TAKEN_VALUE = 3;
+      public static final int STATE_REWARD_TAKEN_VALUE = 3;
 
 
       public final int getNumber() {
@@ -231,10 +231,10 @@ public final class InvestigationTargetOuterClass {
        */
       public static State forNumber(int value) {
         switch (value) {
-          case 0: return INVALID;
-          case 1: return IN_PROGRESS;
-          case 2: return COMPLETE;
-          case 3: return REWARD_TAKEN;
+          case 0: return STATE_INVALID;
+          case 1: return STATE_IN_PROGRESS;
+          case 2: return STATE_COMPLETE;
+          case 3: return STATE_REWARD_TAKEN;
           default: return null;
         }
       }
@@ -368,7 +368,7 @@ public final class InvestigationTargetOuterClass {
     @java.lang.Override
     public void writeTo(com.google.protobuf.CodedOutputStream output)
                         throws java.io.IOException {
-      if (state_ != emu.grasscutter.net.proto.InvestigationTargetOuterClass.InvestigationTarget.State.INVALID.getNumber()) {
+      if (state_ != emu.grasscutter.net.proto.InvestigationTargetOuterClass.InvestigationTarget.State.STATE_INVALID.getNumber()) {
         output.writeEnum(1, state_);
       }
       if (questId_ != 0) {
@@ -392,7 +392,7 @@ public final class InvestigationTargetOuterClass {
       if (size != -1) return size;
 
       size = 0;
-      if (state_ != emu.grasscutter.net.proto.InvestigationTargetOuterClass.InvestigationTarget.State.INVALID.getNumber()) {
+      if (state_ != emu.grasscutter.net.proto.InvestigationTargetOuterClass.InvestigationTarget.State.STATE_INVALID.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(1, state_);
       }
@@ -971,14 +971,14 @@ public final class InvestigationTargetOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\031InvestigationTarget.proto\"\335\001\n\023Investig" +
+      "\n\031InvestigationTarget.proto\"\365\001\n\023Investig" +
       "ationTarget\022\026\n\016total_progress\030\014 \001(\r\022\020\n\010p" +
       "rogress\030\017 \001(\r\022\020\n\010quest_id\030\004 \001(\r\022\030\n\020inves" +
       "tigation_id\030\010 \001(\r\022)\n\005state\030\001 \001(\0162\032.Inves" +
-      "tigationTarget.State\"E\n\005State\022\013\n\007INVALID" +
-      "\020\000\022\017\n\013IN_PROGRESS\020\001\022\014\n\010COMPLETE\020\002\022\020\n\014REW" +
-      "ARD_TAKEN\020\003B\033\n\031emu.grasscutter.net.proto" +
-      "b\006proto3"
+      "tigationTarget.State\"]\n\005State\022\021\n\rSTATE_I" +
+      "NVALID\020\000\022\025\n\021STATE_IN_PROGRESS\020\001\022\022\n\016STATE" +
+      "_COMPLETE\020\002\022\026\n\022STATE_REWARD_TAKEN\020\003B\033\n\031e" +
+      "mu.grasscutter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

@@ -160,40 +160,40 @@ public final class InvestigationOuterClass {
     public enum State
         implements com.google.protobuf.ProtocolMessageEnum {
       /**
-       * <code>INVALID = 0;</code>
+       * <code>STATE_INVALID = 0;</code>
        */
-      INVALID(0),
+      STATE_INVALID(0),
       /**
-       * <code>IN_PROGRESS = 1;</code>
+       * <code>STATE_IN_PROGRESS = 1;</code>
        */
-      IN_PROGRESS(1),
+      STATE_IN_PROGRESS(1),
       /**
-       * <code>COMPLETE = 2;</code>
+       * <code>STATE_COMPLETE = 2;</code>
        */
-      COMPLETE(2),
+      STATE_COMPLETE(2),
       /**
-       * <code>REWARD_TAKEN = 3;</code>
+       * <code>STATE_REWARD_TAKEN = 3;</code>
        */
-      REWARD_TAKEN(3),
+      STATE_REWARD_TAKEN(3),
       UNRECOGNIZED(-1),
       ;
 
       /**
-       * <code>INVALID = 0;</code>
+       * <code>STATE_INVALID = 0;</code>
        */
-      public static final int INVALID_VALUE = 0;
+      public static final int STATE_INVALID_VALUE = 0;
       /**
-       * <code>IN_PROGRESS = 1;</code>
+       * <code>STATE_IN_PROGRESS = 1;</code>
        */
-      public static final int IN_PROGRESS_VALUE = 1;
+      public static final int STATE_IN_PROGRESS_VALUE = 1;
       /**
-       * <code>COMPLETE = 2;</code>
+       * <code>STATE_COMPLETE = 2;</code>
        */
-      public static final int COMPLETE_VALUE = 2;
+      public static final int STATE_COMPLETE_VALUE = 2;
       /**
-       * <code>REWARD_TAKEN = 3;</code>
+       * <code>STATE_REWARD_TAKEN = 3;</code>
        */
-      public static final int REWARD_TAKEN_VALUE = 3;
+      public static final int STATE_REWARD_TAKEN_VALUE = 3;
 
 
       public final int getNumber() {
@@ -220,10 +220,10 @@ public final class InvestigationOuterClass {
        */
       public static State forNumber(int value) {
         switch (value) {
-          case 0: return INVALID;
-          case 1: return IN_PROGRESS;
-          case 2: return COMPLETE;
-          case 3: return REWARD_TAKEN;
+          case 0: return STATE_INVALID;
+          case 1: return STATE_IN_PROGRESS;
+          case 2: return STATE_COMPLETE;
+          case 3: return STATE_REWARD_TAKEN;
           default: return null;
         }
       }
@@ -352,7 +352,7 @@ public final class InvestigationOuterClass {
       if (id_ != 0) {
         output.writeUInt32(8, id_);
       }
-      if (state_ != emu.grasscutter.net.proto.InvestigationOuterClass.Investigation.State.INVALID.getNumber()) {
+      if (state_ != emu.grasscutter.net.proto.InvestigationOuterClass.Investigation.State.STATE_INVALID.getNumber()) {
         output.writeEnum(12, state_);
       }
       if (totalProgress_ != 0) {
@@ -375,7 +375,7 @@ public final class InvestigationOuterClass {
         size += com.google.protobuf.CodedOutputStream
           .computeUInt32Size(8, id_);
       }
-      if (state_ != emu.grasscutter.net.proto.InvestigationOuterClass.Investigation.State.INVALID.getNumber()) {
+      if (state_ != emu.grasscutter.net.proto.InvestigationOuterClass.Investigation.State.STATE_INVALID.getNumber()) {
         size += com.google.protobuf.CodedOutputStream
           .computeEnumSize(12, state_);
       }
@@ -901,12 +901,13 @@ public final class InvestigationOuterClass {
       descriptor;
   static {
     java.lang.String[] descriptorData = {
-      "\n\023Investigation.proto\"\261\001\n\rInvestigation\022" +
+      "\n\023Investigation.proto\"\311\001\n\rInvestigation\022" +
       "\n\n\002id\030\010 \001(\r\022\020\n\010progress\030\007 \001(\r\022#\n\005state\030\014" +
       " \001(\0162\024.Investigation.State\022\026\n\016total_prog" +
-      "ress\030\016 \001(\r\"E\n\005State\022\013\n\007INVALID\020\000\022\017\n\013IN_P" +
-      "ROGRESS\020\001\022\014\n\010COMPLETE\020\002\022\020\n\014REWARD_TAKEN\020" +
-      "\003B\033\n\031emu.grasscutter.net.protob\006proto3"
+      "ress\030\016 \001(\r\"]\n\005State\022\021\n\rSTATE_INVALID\020\000\022\025" +
+      "\n\021STATE_IN_PROGRESS\020\001\022\022\n\016STATE_COMPLETE\020" +
+      "\002\022\026\n\022STATE_REWARD_TAKEN\020\003B\033\n\031emu.grasscu" +
+      "tter.net.protob\006proto3"
     };
     descriptor = com.google.protobuf.Descriptors.FileDescriptor
       .internalBuildGeneratedFileFrom(descriptorData,

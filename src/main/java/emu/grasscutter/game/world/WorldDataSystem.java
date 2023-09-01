@@ -96,7 +96,7 @@ public class WorldDataSystem extends BaseGameSystem {
         var groupId = imd.getGroupIdList().get(0);
         var monsterId = imd.getMonsterIdList().get(0);
         var sceneId = imd.getCityData().getSceneId();
-        var group = getInvestigationGroup(sceneId, groupId);
+        var group = getInvestigationGroup(sceneId, groupId) == null ? getInvestigationGroup(imd.getCityData().getSceneId(), 133104394) : getInvestigationGroup(sceneId, groupId);
 
         if (group == null || group.monsters == null) {
             return null;
@@ -105,7 +105,8 @@ public class WorldDataSystem extends BaseGameSystem {
         var monster =
                 group.monsters.values().stream().filter(x -> x.monster_id == monsterId).findFirst();
         if (monster.isEmpty()) {
-            return null;
+            //return null;
+			Grasscutter.getLogger().debug("missing monsterId {} in group {}",monsterId,groupId);
         }
 
         var builder = InvestigationMonsterOuterClass.InvestigationMonster.newBuilder();
@@ -116,11 +117,11 @@ public class WorldDataSystem extends BaseGameSystem {
                 .setSceneId(imd.getCityData().getSceneId())
                 .setGroupId(groupId)
                 .setMonsterId(monsterId)
-                .setLevel(getMonsterLevel(monster.get(), player.getWorld()))
+                .setLevel(monster.isEmpty() ? 90 :getMonsterLevel(monster.get(), player.getWorld()))
                 .setIsAlive(true)
                 .setNextRefreshTime(Integer.MAX_VALUE)
                 .setRefreshInterval(Integer.MAX_VALUE)
-                .setPos(monster.get().pos.toProto());
+                .setPos(monster.isEmpty() ? new Position(0,0,0).toProto() : monster.get().pos.toProto());
 
         if ("Boss".equals(imd.getMonsterCategory())) {
             var bossChest = group.searchBossChestInGroup();

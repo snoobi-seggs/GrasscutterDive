@@ -6,8 +6,10 @@ import emu.grasscutter.Grasscutter;
 import emu.grasscutter.command.Command;
 import emu.grasscutter.command.CommandHandler;
 import emu.grasscutter.game.player.Player;
-import emu.grasscutter.server.packet.send.PacketPlayerPropChangeNotify;
-import emu.grasscutter.server.packet.send.PacketPlayerPropNotify;
+import emu.grasscutter.game.props.*;
+import emu.grasscutter.server.packet.send.*;
+import emu.grasscutter.net.proto.ChatInfoOuterClass.ChatInfo.*;
+import emu.grasscutter.net.proto.*;
 import java.util.List;
 
 @Command(
@@ -49,6 +51,30 @@ public final class TestCommand implements CommandHandler {
 				targetPlayer.sendPacket(new PacketPlayerPropNotify(propId, propVal));
 				targetPlayer.sendPacket(new PacketPlayerPropChangeNotify(propId, propVal));
 				CommandHandler.sendMessage(sender, "SET PLAYER PROP SUCC");
+			}
+			case "coop" -> {
+				// World player info packets
+                targetPlayer.getSession().send(new PacketWorldPlayerInfoNotify(targetPlayer));	// DONE
+                targetPlayer.getSession().send(new PacketScenePlayerInfoNotify(targetPlayer.getWorld(),true));	// DONE
+                targetPlayer.getSession().send(new PacketWorldPlayerRTTNotify(targetPlayer.getWorld(), true));	// DONE
+                // Team packets
+                targetPlayer.getSession().send(new PacketSyncTeamEntityNotify(targetPlayer));
+                targetPlayer.getSession().send(new PacketSyncScenePlayTeamEntityNotify(targetPlayer));
+			}
+			case "stats" -> {
+				try {
+					var prop = FightProperty.getPropById(Integer.parseInt(args.get(1)));
+					int propVal = args.size() >= 3 ? Integer.parseInt(args.get(2)) : 0;
+					if (prop.getId() != 0) {
+						var entity = targetPlayer.getTeamManager().getCurrentAvatarEntity();
+						entity.setFightProperty(prop, propVal);
+						entity.getWorld().broadcastPacket(new PacketEntityFightPropUpdateNotify(entity, prop));
+					} else {
+						CommandHandler.sendMessage(sender, "NO SUCH STAT ID");
+					}
+				} catch (Exception e) {
+					CommandHandler.sendMessage(sender, "INVALID STAT ARG");
+				}
 			}
 			default -> {
 				CommandHandler.sendMessage(sender, "NOT DEFINED TEST COMM NAME");

@@ -10,7 +10,7 @@ import emu.grasscutter.data.binout.*;
 import emu.grasscutter.data.binout.AbilityModifier.AbilityModifierAction;
 import emu.grasscutter.data.binout.config.*;
 import emu.grasscutter.data.binout.routes.*;
-import emu.grasscutter.data.common.PointData;
+import emu.grasscutter.data.common.*;
 import emu.grasscutter.data.custom.*;
 import emu.grasscutter.data.excels.trial.TrialAvatarActivityDataData;
 import emu.grasscutter.data.server.*;
@@ -124,6 +124,8 @@ public final class ResourceLoader {
         loadGroupReplacements();
         loadTrialAvatarCustomData();
         loadGlobalCombatConfig();
+		
+		loadWeatherAreas();
 
         EntityControllerScriptManager.load();
 
@@ -988,6 +990,30 @@ public final class ResourceLoader {
                     .debug("Loaded {} group replacements.", GameData.getGroupReplacements().size());
         }
     }
+	
+	private static void loadWeatherAreas() {
+		val pattern = Pattern.compile("scene([0-9]+)_weather_areas\\.json");
+		//rn harddcoded
+		List<WeatherArea> wa;
+		
+		try {
+			wa = JsonUtils.loadToList(getResourcePath("Scripts/Scene/3/" + "scene3_weather_areas.json"), WeatherArea.class);
+			//Grasscutter.getLogger().warn(wa.toString());  //print out res
+              } catch (Exception e) {
+                  e.printStackTrace();
+                  return;
+              }
+		
+		if (wa.size() == 0) {
+			Grasscutter.getLogger().error("no weather area found for scene 3");
+			return;
+		}
+		
+		wa.forEach(weatherArea -> {
+			weatherArea.onLoad();
+			GameData.getWeatherAreasMap().put(weatherArea.getAreaId(), weatherArea);
+		});
+	}
 
     // private static HashSet<String> modifierActionTypes = new HashSet<>();
     public static class AbilityConfigData {
