@@ -1,25 +1,15 @@
 package emu.grasscutter.game.player;
 
-import static emu.grasscutter.config.Configuration.GAME_OPTIONS;
-
-import dev.morphia.annotations.Entity;
-import dev.morphia.annotations.Transient;
-import emu.grasscutter.GameConstants;
-import emu.grasscutter.Grasscutter;
+import dev.morphia.annotations.*;
+import emu.grasscutter.*;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.excels.avatar.AvatarSkillDepotData;
 import emu.grasscutter.game.avatar.Avatar;
-import emu.grasscutter.game.entity.EntityAvatar;
-import emu.grasscutter.game.entity.EntityBaseGadget;
-import emu.grasscutter.game.entity.EntityTeam;
-import emu.grasscutter.game.props.ElementType;
-import emu.grasscutter.game.props.EnterReason;
-import emu.grasscutter.game.props.FightProperty;
-import emu.grasscutter.game.world.Position;
-import emu.grasscutter.game.world.Scene;
-import emu.grasscutter.game.world.World;
-import emu.grasscutter.net.packet.BasePacket;
-import emu.grasscutter.net.packet.PacketOpcodes;
+import emu.grasscutter.game.entity.*;
+import emu.grasscutter.game.props.*;
+import emu.grasscutter.game.world.*;
+import emu.grasscutter.net.packet.*;
+import emu.grasscutter.net.proto.*;
 import emu.grasscutter.net.proto.AbilityControlBlockOuterClass.AbilityControlBlock;
 import emu.grasscutter.net.proto.AbilityEmbryoOuterClass.AbilityEmbryo;
 import emu.grasscutter.net.proto.EnterTypeOuterClass.EnterType;
@@ -27,20 +17,18 @@ import emu.grasscutter.net.proto.MotionStateOuterClass.MotionState;
 import emu.grasscutter.net.proto.PlayerDieTypeOuterClass.PlayerDieType;
 import emu.grasscutter.net.proto.RetcodeOuterClass.Retcode;
 import emu.grasscutter.net.proto.TrialAvatarGrantRecordOuterClass.TrialAvatarGrantRecord.GrantReason;
-import emu.grasscutter.net.proto.VisionTypeOuterClass;
 import emu.grasscutter.server.event.entity.EntityCreationEvent;
-import emu.grasscutter.server.event.player.PlayerTeamDeathEvent;
+import emu.grasscutter.server.event.player.*;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Utils;
-import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
-import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
-import it.unimi.dsi.fastutil.ints.IntSet;
+import it.unimi.dsi.fastutil.ints.*;
 import it.unimi.dsi.fastutil.objects.Object2IntOpenHashMap;
+import lombok.*;
+
 import java.util.*;
 import java.util.stream.Stream;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.val;
+
+import static emu.grasscutter.config.Configuration.GAME_OPTIONS;
 
 @Entity
 public final class TeamManager extends BasePlayerDataManager {
@@ -48,8 +36,7 @@ public final class TeamManager extends BasePlayerDataManager {
     @Transient @Getter private final Set<EntityBaseGadget> gadgets;
     @Transient @Getter private final IntSet teamResonances;
     @Transient @Getter private final IntSet teamResonancesConfig;
-	@Transient @Getter @Setter private Set<String> teamAbilityEmbryos;	// TODO implement teamAbilties for levelEntityConfig
-	
+    @Transient @Getter @Setter private Set<String> teamAbilityEmbryos;
     // This needs to be a LinkedHashMap to guarantee insertion order.
     @Getter private LinkedHashMap<Integer, TeamInfo> teams;
     private int currentTeamIndex;
@@ -73,7 +60,7 @@ public final class TeamManager extends BasePlayerDataManager {
         this.gadgets = new HashSet<>();
         this.teamResonances = new IntOpenHashSet();
         this.teamResonancesConfig = new IntOpenHashSet();
-		this.teamAbilityEmbryos = new HashSet<>();
+        this.teamAbilityEmbryos = new HashSet<>();
         this.trialAvatars = new HashMap<>();
         this.trialAvatarTeam = new TeamInfo();
     }
@@ -198,7 +185,7 @@ public final class TeamManager extends BasePlayerDataManager {
 
     public EntityAvatar getCurrentAvatarEntity() {
         // Check if any avatars are equipped.
-        if (this.getActiveTeam().size() == 0) return null;
+        if (this.getActiveTeam().isEmpty()) return null;
 
         if (this.currentCharacterIndex >= this.getActiveTeam().size()) {
             this.currentCharacterIndex = 0; // Reset to the first character.
@@ -361,8 +348,8 @@ public final class TeamManager extends BasePlayerDataManager {
     /** Updates all properties of the active team. */
     public void updateTeamProperties() {
         this.updateTeamResonances(); // Update team resonances.
-        this.getPlayer()
-                .sendPacket(new PacketSceneTeamUpdateNotify(this.getPlayer())); // Notify the player.
+        this.getWorld()
+                .broadcastPacket(new PacketSceneTeamUpdateNotify(this.getPlayer())); // Notify the all players in the world.
 
         // Skill charges packet - Yes, this is official server behavior as of 2.6.0
         this.getActiveTeam().stream()
@@ -435,15 +422,22 @@ public final class TeamManager extends BasePlayerDataManager {
         }
 
         // Check if character changed
-        if (currentEntity != this.getCurrentAvatarEntity()) {
+        var newAvatarEntity = this.getCurrentAvatarEntity();
+        if (currentEntity != null && newAvatarEntity != null && currentEntity != newAvatarEntity) {
+            // Call PlayerSwitchAvatarEvent.
+            var event =
+                    new PlayerSwitchAvatarEvent(
+                            this.getPlayer(), currentEntity.getAvatar(), newAvatarEntity.getAvatar());
+            if (!event.call()) return;
+
             // Remove and Add
-            this.getPlayer().getScene().replaceEntity(currentEntity, this.getCurrentAvatarEntity());
+            this.getPlayer().getScene().replaceEntity(currentEntity, newAvatarEntity);
         }
     }
 
     public synchronized void setupAvatarTeam(int teamId, List<Long> list) {
         // Sanity checks
-        if (list.size() == 0
+        if (list.isEmpty()
                 || list.size() > this.getMaxTeamSize()
                 || this.getPlayer().isInMultiplayer()) {
             return;
@@ -743,10 +737,14 @@ public final class TeamManager extends BasePlayerDataManager {
         this.getPlayer().sendPacket(new PacketChangeTeamNameRsp(teamId, teamName));
     }
 
+    /**
+     * Swaps the current avatar in the scene.
+     *
+     * @param guid The GUID of the avatar to swap to.
+     */
     public synchronized void changeAvatar(long guid) {
         EntityAvatar oldEntity = this.getCurrentAvatarEntity();
-
-        if (guid == oldEntity.getAvatar().getGuid()) {
+        if (oldEntity == null || guid == oldEntity.getAvatar().getGuid()) {
             return;
         }
 
@@ -762,6 +760,13 @@ public final class TeamManager extends BasePlayerDataManager {
         if (index < 0 || newEntity == oldEntity) {
             return;
         }
+
+        // Call PlayerSwitchAvatarEvent.
+        var event =
+                new PlayerSwitchAvatarEvent(this.getPlayer(), oldEntity.getAvatar(), newEntity.getAvatar());
+        if (!event.call()) return;
+
+        newEntity = event.getNewAvatarEntity();
 
         // Set index
         this.setCurrentCharacterIndex(index);

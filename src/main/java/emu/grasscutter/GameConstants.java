@@ -1,12 +1,14 @@
 package emu.grasscutter;
 
 import emu.grasscutter.game.world.Position;
-import emu.grasscutter.utils.objects.SparseSet;
 import emu.grasscutter.utils.Utils;
+import emu.grasscutter.utils.objects.SparseSet;
+
 import java.util.Arrays;
 
 public final class GameConstants {
     public static String VERSION = "4.0.0";
+    public static int[] VERSION_PARTS = {4, 0, 0};
     public static boolean DEBUG = false;
 
     public static final int DEFAULT_TEAMS = 4;
@@ -33,6 +35,7 @@ public final class GameConstants {
         "Avatar_FallAnthem_Achievement_Listener",
         "GrapplingHookSkill_Ability",
         "SceneAbility_DiveVolume",
+        "Avatar_PlayerBoy_DiveStamina_Reduction",
 		
 		// Team
 		"Ability_Avatar_Dive_Team", //(THIS SHLD HAVE BEEN IN TEAM)

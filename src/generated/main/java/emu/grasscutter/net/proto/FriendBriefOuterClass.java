@@ -102,10 +102,6 @@ public final class FriendBriefOuterClass {
         getOnlineIdBytes();
 
     /**
-     * <pre>
-     *NHCJGKFNCFD (guaranteed)
-     * </pre>
-     *
      * <code>uint32 last_active_time = 12;</code>
      * @return The lastActiveTime.
      */
@@ -118,10 +114,6 @@ public final class FriendBriefOuterClass {
     int getNameCardId();
 
     /**
-     * <pre>
-     *PKANPMBCGGH (guaranteed)
-     * </pre>
-     *
      * <code>uint32 mp_player_num = 14;</code>
      * @return The mpPlayerNum.
      */
@@ -134,10 +126,6 @@ public final class FriendBriefOuterClass {
     boolean getIsChatNoDisturb();
 
     /**
-     * <pre>
-     *EFMMMOPAPAK (guaranteed)
-     * </pre>
-     *
      * <code>uint32 chat_sequence = 16;</code>
      * @return The chatSequence.
      */
@@ -206,20 +194,12 @@ public final class FriendBriefOuterClass {
     emu.grasscutter.net.proto.ProfilePictureOuterClass.ProfilePictureOrBuilder getProfilePictureOrBuilder();
 
     /**
-     * <pre>
-     *PBFEPMNHMPL (guaranteed)
-     * </pre>
-     *
      * <code>bool is_game_source = 25;</code>
      * @return The isGameSource.
      */
     boolean getIsGameSource();
 
     /**
-     * <pre>
-     *FNCJLBGOBAE (guaranteed)
-     * </pre>
-     *
      * <code>bool is_psn_source = 26;</code>
      * @return The isPsnSource.
      */
@@ -237,20 +217,12 @@ public final class FriendBriefOuterClass {
     emu.grasscutter.net.proto.PlatformTypeOuterClass.PlatformType getPlatformType();
 
     /**
-     * <pre>
-     *IEAHDCLDOEJ (tcg)
-     * </pre>
-     *
      * <code>bool is_in_duel = 28;</code>
      * @return The isInDuel.
      */
     boolean getIsInDuel();
 
     /**
-     * <pre>
-     *BJFJJMGENCH (spectate tcg)
-     * </pre>
-     *
      * <code>bool is_duel_observable = 29;</code>
      * @return The isDuelObservable.
      */
@@ -690,10 +662,6 @@ public final class FriendBriefOuterClass {
     public static final int LAST_ACTIVE_TIME_FIELD_NUMBER = 12;
     private int lastActiveTime_;
     /**
-     * <pre>
-     *NHCJGKFNCFD (guaranteed)
-     * </pre>
-     *
      * <code>uint32 last_active_time = 12;</code>
      * @return The lastActiveTime.
      */
@@ -716,10 +684,6 @@ public final class FriendBriefOuterClass {
     public static final int MP_PLAYER_NUM_FIELD_NUMBER = 14;
     private int mpPlayerNum_;
     /**
-     * <pre>
-     *PKANPMBCGGH (guaranteed)
-     * </pre>
-     *
      * <code>uint32 mp_player_num = 14;</code>
      * @return The mpPlayerNum.
      */
@@ -742,10 +706,6 @@ public final class FriendBriefOuterClass {
     public static final int CHAT_SEQUENCE_FIELD_NUMBER = 16;
     private int chatSequence_;
     /**
-     * <pre>
-     *EFMMMOPAPAK (guaranteed)
-     * </pre>
-     *
      * <code>uint32 chat_sequence = 16;</code>
      * @return The chatSequence.
      */
@@ -880,10 +840,6 @@ public final class FriendBriefOuterClass {
     public static final int IS_GAME_SOURCE_FIELD_NUMBER = 25;
     private boolean isGameSource_;
     /**
-     * <pre>
-     *PBFEPMNHMPL (guaranteed)
-     * </pre>
-     *
      * <code>bool is_game_source = 25;</code>
      * @return The isGameSource.
      */
@@ -895,10 +851,6 @@ public final class FriendBriefOuterClass {
     public static final int IS_PSN_SOURCE_FIELD_NUMBER = 26;
     private boolean isPsnSource_;
     /**
-     * <pre>
-     *FNCJLBGOBAE (guaranteed)
-     * </pre>
-     *
      * <code>bool is_psn_source = 26;</code>
      * @return The isPsnSource.
      */
@@ -929,10 +881,6 @@ public final class FriendBriefOuterClass {
     public static final int IS_IN_DUEL_FIELD_NUMBER = 28;
     private boolean isInDuel_;
     /**
-     * <pre>
-     *IEAHDCLDOEJ (tcg)
-     * </pre>
-     *
      * <code>bool is_in_duel = 28;</code>
      * @return The isInDuel.
      */
@@ -944,10 +892,6 @@ public final class FriendBriefOuterClass {
     public static final int IS_DUEL_OBSERVABLE_FIELD_NUMBER = 29;
     private boolean isDuelObservable_;
     /**
-     * <pre>
-     *BJFJJMGENCH (spectate tcg)
-     * </pre>
-     *
      * <code>bool is_duel_observable = 29;</code>
      * @return The isDuelObservable.
      */
@@ -2179,10 +2123,6 @@ public final class FriendBriefOuterClass {
 
       private int lastActiveTime_ ;
       /**
-       * <pre>
-       *NHCJGKFNCFD (guaranteed)
-       * </pre>
-       *
        * <code>uint32 last_active_time = 12;</code>
        * @return The lastActiveTime.
        */
@@ -2191,10 +2131,6 @@ public final class FriendBriefOuterClass {
         return lastActiveTime_;
       }
       /**
-       * <pre>
-       *NHCJGKFNCFD (guaranteed)
-       * </pre>
-       *
        * <code>uint32 last_active_time = 12;</code>
        * @param value The lastActiveTime to set.
        * @return This builder for chaining.
@@ -2206,10 +2142,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *NHCJGKFNCFD (guaranteed)
-       * </pre>
-       *
        * <code>uint32 last_active_time = 12;</code>
        * @return This builder for chaining.
        */
@@ -2253,10 +2185,6 @@ public final class FriendBriefOuterClass {
 
       private int mpPlayerNum_ ;
       /**
-       * <pre>
-       *PKANPMBCGGH (guaranteed)
-       * </pre>
-       *
        * <code>uint32 mp_player_num = 14;</code>
        * @return The mpPlayerNum.
        */
@@ -2265,10 +2193,6 @@ public final class FriendBriefOuterClass {
         return mpPlayerNum_;
       }
       /**
-       * <pre>
-       *PKANPMBCGGH (guaranteed)
-       * </pre>
-       *
        * <code>uint32 mp_player_num = 14;</code>
        * @param value The mpPlayerNum to set.
        * @return This builder for chaining.
@@ -2280,10 +2204,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *PKANPMBCGGH (guaranteed)
-       * </pre>
-       *
        * <code>uint32 mp_player_num = 14;</code>
        * @return This builder for chaining.
        */
@@ -2327,10 +2247,6 @@ public final class FriendBriefOuterClass {
 
       private int chatSequence_ ;
       /**
-       * <pre>
-       *EFMMMOPAPAK (guaranteed)
-       * </pre>
-       *
        * <code>uint32 chat_sequence = 16;</code>
        * @return The chatSequence.
        */
@@ -2339,10 +2255,6 @@ public final class FriendBriefOuterClass {
         return chatSequence_;
       }
       /**
-       * <pre>
-       *EFMMMOPAPAK (guaranteed)
-       * </pre>
-       *
        * <code>uint32 chat_sequence = 16;</code>
        * @param value The chatSequence to set.
        * @return This builder for chaining.
@@ -2354,10 +2266,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *EFMMMOPAPAK (guaranteed)
-       * </pre>
-       *
        * <code>uint32 chat_sequence = 16;</code>
        * @return This builder for chaining.
        */
@@ -2859,10 +2767,6 @@ public final class FriendBriefOuterClass {
 
       private boolean isGameSource_ ;
       /**
-       * <pre>
-       *PBFEPMNHMPL (guaranteed)
-       * </pre>
-       *
        * <code>bool is_game_source = 25;</code>
        * @return The isGameSource.
        */
@@ -2871,10 +2775,6 @@ public final class FriendBriefOuterClass {
         return isGameSource_;
       }
       /**
-       * <pre>
-       *PBFEPMNHMPL (guaranteed)
-       * </pre>
-       *
        * <code>bool is_game_source = 25;</code>
        * @param value The isGameSource to set.
        * @return This builder for chaining.
@@ -2886,10 +2786,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *PBFEPMNHMPL (guaranteed)
-       * </pre>
-       *
        * <code>bool is_game_source = 25;</code>
        * @return This builder for chaining.
        */
@@ -2902,10 +2798,6 @@ public final class FriendBriefOuterClass {
 
       private boolean isPsnSource_ ;
       /**
-       * <pre>
-       *FNCJLBGOBAE (guaranteed)
-       * </pre>
-       *
        * <code>bool is_psn_source = 26;</code>
        * @return The isPsnSource.
        */
@@ -2914,10 +2806,6 @@ public final class FriendBriefOuterClass {
         return isPsnSource_;
       }
       /**
-       * <pre>
-       *FNCJLBGOBAE (guaranteed)
-       * </pre>
-       *
        * <code>bool is_psn_source = 26;</code>
        * @param value The isPsnSource to set.
        * @return This builder for chaining.
@@ -2929,10 +2817,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *FNCJLBGOBAE (guaranteed)
-       * </pre>
-       *
        * <code>bool is_psn_source = 26;</code>
        * @return This builder for chaining.
        */
@@ -2999,10 +2883,6 @@ public final class FriendBriefOuterClass {
 
       private boolean isInDuel_ ;
       /**
-       * <pre>
-       *IEAHDCLDOEJ (tcg)
-       * </pre>
-       *
        * <code>bool is_in_duel = 28;</code>
        * @return The isInDuel.
        */
@@ -3011,10 +2891,6 @@ public final class FriendBriefOuterClass {
         return isInDuel_;
       }
       /**
-       * <pre>
-       *IEAHDCLDOEJ (tcg)
-       * </pre>
-       *
        * <code>bool is_in_duel = 28;</code>
        * @param value The isInDuel to set.
        * @return This builder for chaining.
@@ -3026,10 +2902,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *IEAHDCLDOEJ (tcg)
-       * </pre>
-       *
        * <code>bool is_in_duel = 28;</code>
        * @return This builder for chaining.
        */
@@ -3042,10 +2914,6 @@ public final class FriendBriefOuterClass {
 
       private boolean isDuelObservable_ ;
       /**
-       * <pre>
-       *BJFJJMGENCH (spectate tcg)
-       * </pre>
-       *
        * <code>bool is_duel_observable = 29;</code>
        * @return The isDuelObservable.
        */
@@ -3054,10 +2922,6 @@ public final class FriendBriefOuterClass {
         return isDuelObservable_;
       }
       /**
-       * <pre>
-       *BJFJJMGENCH (spectate tcg)
-       * </pre>
-       *
        * <code>bool is_duel_observable = 29;</code>
        * @param value The isDuelObservable to set.
        * @return This builder for chaining.
@@ -3069,10 +2933,6 @@ public final class FriendBriefOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *BJFJJMGENCH (spectate tcg)
-       * </pre>
-       *
        * <code>bool is_duel_observable = 29;</code>
        * @return This builder for chaining.
        */

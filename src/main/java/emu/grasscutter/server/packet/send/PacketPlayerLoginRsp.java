@@ -1,7 +1,5 @@
 package emu.grasscutter.server.packet.send;
 
-import static emu.grasscutter.config.Configuration.*;
-
 import com.google.protobuf.ByteString;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.Grasscutter.ServerRunMode;
@@ -12,7 +10,10 @@ import emu.grasscutter.net.proto.RegionInfoOuterClass.RegionInfo;
 import emu.grasscutter.server.game.GameSession;
 import emu.grasscutter.server.http.dispatch.RegionHandler;
 import emu.grasscutter.utils.Crypto;
+
 import java.util.Objects;
+
+import static emu.grasscutter.config.Configuration.*;
 
 public class PacketPlayerLoginRsp extends BasePacket {
 
@@ -35,7 +36,7 @@ public class PacketPlayerLoginRsp extends BasePacket {
                                     .setGateserverPort(lr(GAME_INFO.accessPort, GAME_INFO.bindPort))
                                     .build();
 
-                    var regionCache =
+                    regionCache =
                             QueryCurrRegionHttpRspOuterClass.QueryCurrRegionHttpRsp.newBuilder()
                                     .setRegionInfo(serverRegion)
                                     .setClientSecretKey(ByteString.copyFrom(Crypto.DISPATCH_SEED))

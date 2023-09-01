@@ -10,8 +10,6 @@ public final class PacketGivingRecordNotify extends BasePacket {
     public PacketGivingRecordNotify(Collection<GivingRecord> records) {
         super(PacketOpcodes.GivingRecordNotify);
 
-        this.setData(GivingRecordNotify.newBuilder()
-            .addAllGivingRecordList(records)
-            .build());
+        this.setData(GivingRecordNotify.newBuilder().addAllGivingRecordList(records).build());
     }
 }

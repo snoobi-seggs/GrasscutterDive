@@ -19,11 +19,12 @@ import emu.grasscutter.game.quest.GameMainQuest;
 import emu.grasscutter.game.world.SceneGroupInstance;
 import emu.grasscutter.utils.objects.Returnable;
 import io.netty.util.concurrent.FastThreadLocalThread;
+import lombok.Getter;
+
+import javax.annotation.Nullable;
 import java.util.List;
 import java.util.concurrent.*;
 import java.util.stream.Stream;
-import javax.annotation.Nullable;
-import lombok.Getter;
 
 import static com.mongodb.client.model.Filters.eq;
 
@@ -542,19 +543,16 @@ public final class DatabaseHelper {
         DatabaseHelper.saveGameAsync(musicGameBeatmap);
     }
 
-	@Nullable
-    public static Achievements getAchievementData(int uid) {
-		try {
+    @Nullable public static Achievements getAchievementData(int uid) {
+        try {
             return DatabaseManager.getGameDatastore()
-                .find(Achievements.class)
-                .filter(Filters.and(Filters.eq("uid", uid)))
-                .first();
+                    .find(Achievements.class)
+                    .filter(Filters.and(Filters.eq("uid", uid)))
+                    .first();
         } catch (IllegalArgumentException e) {
-            Grasscutter.getLogger().warn("Error occurred while getting uid " + uid + "'s achievement data", e);
-            //delete uid's broken achievement data. sorry XD
-            DatabaseManager.getGameDatabase()
-                .getCollection("achievements")
-                .deleteMany(eq("uid", uid));
+            Grasscutter.getLogger()
+                    .debug("Error occurred while getting uid " + uid + "'s achievement data", e);
+            DatabaseManager.getGameDatabase().getCollection("achievements").deleteMany(eq("uid", uid));
             return null;
         }
     }

@@ -14,6 +14,7 @@ import java.util.List;
 public final class GivingData extends GameResource {
     @SerializedName(value = "id", alternate = "Id")
     private int id;
+
     private int talkId;
     private int mistakeTalkId;
 
@@ -40,7 +41,9 @@ public final class GivingData extends GameResource {
     }
 
     public enum GiveType {
-        @SerializedName("GIVING_TYPE_QUEST") QUEST,
-        @SerializedName("GIVING_TYPE_GROUP") GROUP
+        @SerializedName("GIVING_TYPE_QUEST")
+        QUEST,
+        @SerializedName("GIVING_TYPE_GROUP")
+        GROUP
     }
 }

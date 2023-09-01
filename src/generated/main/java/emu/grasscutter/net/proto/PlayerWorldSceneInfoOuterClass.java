@@ -19,28 +19,16 @@ public final class PlayerWorldSceneInfoOuterClass {
       com.google.protobuf.MessageOrBuilder {
 
     /**
-     * <pre>
-     *NHFPBBLCHKH DCGPONECHMM
-     * </pre>
-     *
      * <code>.MapLayerInfo map_layer_info = 1;</code>
      * @return Whether the mapLayerInfo field is set.
      */
     boolean hasMapLayerInfo();
     /**
-     * <pre>
-     *NHFPBBLCHKH DCGPONECHMM
-     * </pre>
-     *
      * <code>.MapLayerInfo map_layer_info = 1;</code>
      * @return The mapLayerInfo.
      */
     emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo getMapLayerInfo();
     /**
-     * <pre>
-     *NHFPBBLCHKH DCGPONECHMM
-     * </pre>
-     *
      * <code>.MapLayerInfo map_layer_info = 1;</code>
      */
     emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfoOrBuilder getMapLayerInfoOrBuilder();
@@ -207,10 +195,6 @@ public final class PlayerWorldSceneInfoOuterClass {
     public static final int MAP_LAYER_INFO_FIELD_NUMBER = 1;
     private emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo mapLayerInfo_;
     /**
-     * <pre>
-     *NHFPBBLCHKH DCGPONECHMM
-     * </pre>
-     *
      * <code>.MapLayerInfo map_layer_info = 1;</code>
      * @return Whether the mapLayerInfo field is set.
      */
@@ -219,10 +203,6 @@ public final class PlayerWorldSceneInfoOuterClass {
       return mapLayerInfo_ != null;
     }
     /**
-     * <pre>
-     *NHFPBBLCHKH DCGPONECHMM
-     * </pre>
-     *
      * <code>.MapLayerInfo map_layer_info = 1;</code>
      * @return The mapLayerInfo.
      */
@@ -231,10 +211,6 @@ public final class PlayerWorldSceneInfoOuterClass {
       return mapLayerInfo_ == null ? emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo.getDefaultInstance() : mapLayerInfo_;
     }
     /**
-     * <pre>
-     *NHFPBBLCHKH DCGPONECHMM
-     * </pre>
-     *
      * <code>.MapLayerInfo map_layer_info = 1;</code>
      */
     @java.lang.Override
@@ -697,10 +673,6 @@ public final class PlayerWorldSceneInfoOuterClass {
       private com.google.protobuf.SingleFieldBuilderV3<
           emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo, emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo.Builder, emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfoOrBuilder> mapLayerInfoBuilder_;
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        * @return Whether the mapLayerInfo field is set.
        */
@@ -708,10 +680,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         return mapLayerInfoBuilder_ != null || mapLayerInfo_ != null;
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        * @return The mapLayerInfo.
        */
@@ -723,10 +691,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         }
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       public Builder setMapLayerInfo(emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo value) {
@@ -743,10 +707,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       public Builder setMapLayerInfo(
@@ -761,10 +721,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       public Builder mergeMapLayerInfo(emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo value) {
@@ -783,10 +739,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       public Builder clearMapLayerInfo() {
@@ -801,10 +753,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         return this;
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       public emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfo.Builder getMapLayerInfoBuilder() {
@@ -813,10 +761,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         return getMapLayerInfoFieldBuilder().getBuilder();
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       public emu.grasscutter.net.proto.MapLayerInfoOuterClass.MapLayerInfoOrBuilder getMapLayerInfoOrBuilder() {
@@ -828,10 +772,6 @@ public final class PlayerWorldSceneInfoOuterClass {
         }
       }
       /**
-       * <pre>
-       *NHFPBBLCHKH DCGPONECHMM
-       * </pre>
-       *
        * <code>.MapLayerInfo map_layer_info = 1;</code>
        */
       private com.google.protobuf.SingleFieldBuilderV3<

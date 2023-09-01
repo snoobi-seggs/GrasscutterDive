@@ -1,17 +1,13 @@
 package emu.grasscutter.command.commands;
 
-import emu.grasscutter.command.Command;
-import emu.grasscutter.command.CommandHandler;
+import emu.grasscutter.command.*;
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.PlayerProperty;
 import emu.grasscutter.game.tower.TowerLevelRecord;
-import emu.grasscutter.server.packet.send.PacketOpenStateChangeNotify;
-import emu.grasscutter.server.packet.send.PacketSceneAreaUnlockNotify;
-import emu.grasscutter.server.packet.send.PacketScenePointUnlockNotify;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import emu.grasscutter.server.packet.send.*;
+
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.IntStream;
 
@@ -86,9 +82,9 @@ public final class SetPropCommand implements CommandHandler {
         this.props.put("fly", flyable);
         this.props.put("glider", flyable);
         this.props.put("canglide", flyable);
-		
-		Prop dive = new Prop("CanDive", PlayerProperty.PROP_PLAYER_CAN_DIVE, PseudoProp.CAN_DIVE);
-		this.props.put("dive", dive);
+
+        Prop dive = new Prop("CanDive", PlayerProperty.PROP_PLAYER_CAN_DIVE, PseudoProp.CAN_DIVE);
+        this.props.put("dive", dive);
         this.props.put("swim", dive);
         this.props.put("water", dive);
         this.props.put("candive", dive);
@@ -135,7 +131,7 @@ public final class SetPropCommand implements CommandHandler {
                     case SET_OPENSTATE -> this.setOpenState(targetPlayer, value, 1);
                     case UNSET_OPENSTATE -> this.setOpenState(targetPlayer, value, 0);
                     case UNLOCK_MAP -> unlockMap(targetPlayer, value);
-					case CAN_DIVE -> canDive(targetPlayer, value);
+                    case CAN_DIVE -> canDive(targetPlayer, value);
                     default -> targetPlayer.setProperty(prop.prop, value);
                 };
 
@@ -298,7 +294,7 @@ public final class SetPropCommand implements CommandHandler {
         UNSET_OPENSTATE,
         UNLOCK_MAP,
         IS_FLYABLE,
-		CAN_DIVE
+        CAN_DIVE
     }
 
     static class Prop {

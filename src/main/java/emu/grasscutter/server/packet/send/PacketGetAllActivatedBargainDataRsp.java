@@ -11,10 +11,9 @@ public final class PacketGetAllActivatedBargainDataRsp extends BasePacket {
     public PacketGetAllActivatedBargainDataRsp(Collection<BargainRecord> records) {
         super(PacketOpcodes.GetAllActivatedBargainDataRsp);
 
-        this.setData(GetAllActivatedBargainDataRsp.newBuilder()
-            .setRetcode(Retcode.RET_SUCC.getNumber())
-            .addAllSnapshotList(records.stream()
-                .map(BargainRecord::toSnapshot)
-                .toList()));
+        this.setData(
+                GetAllActivatedBargainDataRsp.newBuilder()
+                        .setRetcode(Retcode.RET_SUCC.getNumber())
+                        .addAllSnapshotList(records.stream().map(BargainRecord::toSnapshot).toList()));
     }
 }

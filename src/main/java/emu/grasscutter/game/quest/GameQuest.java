@@ -12,6 +12,7 @@ import emu.grasscutter.game.quest.enums.*;
 import emu.grasscutter.net.proto.ChapterStateOuterClass;
 import emu.grasscutter.net.proto.QuestOuterClass.Quest;
 import emu.grasscutter.scripts.data.SceneGroup;
+import emu.grasscutter.server.event.player.PlayerCompleteQuestEvent;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.utils.Utils;
 import it.unimi.dsi.fastutil.ints.IntIntImmutablePair;
@@ -196,6 +197,10 @@ public class GameQuest {
     }
 
     public void finish() {
+        // Call PlayerCompleteQuestEvent.
+        var event = new PlayerCompleteQuestEvent(this.getOwner(), this);
+        if (!event.call()) return;
+
         // Check if the quest has been finished.
         synchronized (this) {
             if (this.state == QuestState.QUEST_STATE_FINISHED) {

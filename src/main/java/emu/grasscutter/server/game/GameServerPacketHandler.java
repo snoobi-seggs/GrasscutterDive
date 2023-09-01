@@ -6,14 +6,10 @@ import emu.grasscutter.net.packet.*;
 import emu.grasscutter.server.event.game.ReceivePacketEvent;
 import emu.grasscutter.server.game.GameSession.SessionState;
 import it.unimi.dsi.fastutil.ints.*;
-import org.reflections.Reflections;
-
-import java.util.Set;
 
 import static emu.grasscutter.config.Configuration.GAME_INFO;
 
-@SuppressWarnings("unchecked")
-public class GameServerPacketHandler {
+public final class GameServerPacketHandler {
     private final Int2ObjectMap<PacketHandler> handlers;
 
     public GameServerPacketHandler(Class<? extends PacketHandler> handlerClass) {
@@ -24,26 +20,22 @@ public class GameServerPacketHandler {
 
     public void registerPacketHandler(Class<? extends PacketHandler> handlerClass) {
         try {
-            Opcodes opcode = handlerClass.getAnnotation(Opcodes.class);
-
+            var opcode = handlerClass.getAnnotation(Opcodes.class);
             if (opcode == null || opcode.disabled() || opcode.value() <= 0) {
                 return;
             }
 
-            PacketHandler packetHandler = handlerClass.getDeclaredConstructor().newInstance();
-
+            var packetHandler = handlerClass.getDeclaredConstructor().newInstance();
             this.handlers.put(opcode.value(), packetHandler);
         } catch (Exception e) {
-            e.printStackTrace();
+            Grasscutter.getLogger().warn("Unable to register handler {}.", handlerClass.getSimpleName(), e);
         }
     }
 
     public void registerHandlers(Class<? extends PacketHandler> handlerClass) {
-        Reflections reflections = new Reflections("emu.grasscutter.server.packet");
-        Set<?> handlerClasses = reflections.getSubTypesOf(handlerClass);
-
-        for (Object obj : handlerClasses) {
-            this.registerPacketHandler((Class<? extends PacketHandler>) obj);
+        var handlerClasses = Grasscutter.reflector.getSubTypesOf(handlerClass);
+        for (var obj : handlerClasses) {
+            this.registerPacketHandler(obj);
         }
 
         // Debug

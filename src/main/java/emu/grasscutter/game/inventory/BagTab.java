@@ -24,11 +24,11 @@ public enum BagTab {
 
     static {
         Stream.of(BagTab.values())
-            .forEach(
-                entry -> {
-                    map.put(entry.getValue(), entry);
-                    stringMap.put(entry.name(), entry);
-                });
+                .forEach(
+                        entry -> {
+                            map.put(entry.getValue(), entry);
+                            stringMap.put(entry.name(), entry);
+                        });
     }
 
     @Getter private final int value;
