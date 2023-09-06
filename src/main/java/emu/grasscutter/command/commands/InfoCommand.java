@@ -56,8 +56,8 @@ public final class InfoCommand implements CommandHandler {
 
             discord.gg/T5vZU6UyeG"""
                     .formatted(
-                            build, playerCount, questingEnabled, scriptsEnabled, fastRequire,
-                            System.getProperty("os.name"), resourceInfo.toString()
+                            build, playerCount, questingEnabled, scriptsEnabled, 
+                            System.getProperty("os.name"), fastRequire, resourceInfo.toString()
                     )
             );
         } else {
