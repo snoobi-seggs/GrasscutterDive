@@ -1,1 +1,1 @@
-java -jar -Xmx4000m grasscutter-4.0.0.jar
+java -jar -Xmx4000m grasscutter-1.7.1.jar
