@@ -139,7 +139,7 @@ public class QuestData extends GameResource {
 
         @SerializedName(
                 value = "_param_str",
-                alternate = {"param_str"})
+                alternate = {"param_str", "paramString"})
         private String paramStr = "";
 
         @SerializedName(
@@ -148,6 +148,7 @@ public class QuestData extends GameResource {
         private int count;
 
         public String asKey() {
+            if (getParam() == null) return questConditionKey(getType(), 0, getParamStr());	//nazrin
             return questConditionKey(getType(), getParam()[0], getParamStr());
         }
     }

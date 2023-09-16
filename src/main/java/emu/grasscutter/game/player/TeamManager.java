@@ -5,6 +5,7 @@ import static emu.grasscutter.config.Configuration.GAME_OPTIONS;
 import dev.morphia.annotations.*;
 import emu.grasscutter.*;
 import emu.grasscutter.data.GameData;
+import emu.grasscutter.data.binout.config.fields.ConfigAbilityData;
 import emu.grasscutter.data.excels.avatar.AvatarSkillDepotData;
 import emu.grasscutter.game.avatar.Avatar;
 import emu.grasscutter.game.entity.*;
@@ -1041,7 +1042,8 @@ public final class TeamManager extends BasePlayerDataManager {
                                     new Object[] {scene, avatar}));
                 }
             }
-
+			
+			// add avatarAbilties to all avatars in team
             for (var entityAvatar : specifiedAvatarList) {
                 var avatarData = entityAvatar.getAvatar().getAvatarData();
                 if (avatarData == null) {
@@ -1058,6 +1060,12 @@ public final class TeamManager extends BasePlayerDataManager {
                     avatarData.getAbilities().add(Utils.abilityHash(abilities.getAbilityName()));
                 }
             }
+
+			// add teamAbilties to team
+			teamAbilityEmbryos.clear();	//clear every new scene
+			if (config.getTeamAbilities() != null) {
+				teamAbilityEmbryos.addAll(config.getTeamAbilities().stream().map(ConfigAbilityData::getAbilityName).toList());
+			}
         } catch (Exception e) {
             Grasscutter.getLogger()
                     .error(

@@ -50,11 +50,13 @@ public final class GameConstants {
 		"Ability_Avatar_Dive_Seahorse_Spray_Baihe",
 		
 		// TEST NADA
-		"Monster_Nada_MuteFollowEffect",
-		"Gagana_GrapplingHookSkill",
-		"Gagana_AvatarAimShoot",
-		"Monster_Nada_ForceAvatarExitFocus",
+		//"Monster_Nada_MuteFollowEffect",
+		//"Gagana_GrapplingHookSkill",
+		//"Gagana_AvatarAimShoot",
+		//"Monster_Nada_ForceAvatarExitFocus",
 		
+		// Sumeru mushroom jump
+		"Avatar_Trampoline_Jump_Controller",
 
 		// Activity
 		"ActivityAbility_Absorb_Shoot",
@@ -63,14 +65,14 @@ public final class GameConstants {
 	
 	public static final String[] DEFAULT_TEAM_ABILITY_STRINGS = {
 		//TEST NADA
-		"Monster_Nada_CreateGagana",
-		"Gagana_ActivateCircle_Electric",
-		"Gagana_ActivateCircle_Fire",
-		"Gagana_ActivateCircle_Ice",
-		"Gagana_ActivateCircle_Wind",
-		"Gagana_ActivateCircle_Water",
-		"Gagana_ActivateCircle_Electric_Mirror",
-		"Gagana_ActivateAimShoot",
+		//"Monster_Nada_CreateGagana",
+		//"Gagana_ActivateCircle_Electric",
+		//"Gagana_ActivateCircle_Fire",
+		//"Gagana_ActivateCircle_Ice",
+		//"Gagana_ActivateCircle_Wind",
+		//"Gagana_ActivateCircle_Water",
+		//"Gagana_ActivateCircle_Electric_Mirror",
+		//"Gagana_ActivateAimShoot",
 		
 		//DIVING
 		"Ability_Avatar_Dive_Team"	//(FONTAINE)

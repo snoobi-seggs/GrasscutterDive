@@ -18,6 +18,7 @@ import emu.grasscutter.game.expedition.ExpeditionSystem;
 import emu.grasscutter.game.gacha.GachaSystem;
 import emu.grasscutter.game.home.HomeWorld;
 import emu.grasscutter.game.home.HomeWorldMPSystem;
+import emu.grasscutter.game.gcg.*;
 import emu.grasscutter.game.managers.cooking.CookingCompoundManager;
 import emu.grasscutter.game.managers.cooking.CookingManager;
 import emu.grasscutter.game.managers.energy.EnergyManager;
@@ -59,6 +60,7 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
     private final Map<Integer, Player> players;
     private final Set<World> worlds;
     private final Int2ObjectMap<HomeWorld> homeWorlds;
+    private final Int2ObjectMap<GcgWorld> gcgWorlds;
 
     @Setter private DispatchClient dispatchClient;
 
@@ -111,6 +113,7 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
             this.players = null;
             this.worlds = null;
             this.homeWorlds = null;
+            this.gcgWorlds = null;
 
             this.inventorySystem = null;
             this.gachaSystem = null;
@@ -155,6 +158,7 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
         this.players = new ConcurrentHashMap<>();
         this.worlds = Collections.synchronizedSet(new HashSet<>());
         this.homeWorlds = Int2ObjectMaps.synchronize(new Int2ObjectOpenHashMap<>());
+        this.gcgWorlds = Int2ObjectMaps.synchronize(new Int2ObjectOpenHashMap<>());
 
         // Extra
         this.scheduler = new ServerTaskScheduler();
@@ -322,6 +326,11 @@ public final class GameServer extends KcpServer implements Iterable<Player> {
     public HomeWorld getHomeWorldOrCreate(Player owner) {
         return this.getHomeWorlds()
                 .computeIfAbsent(owner.getUid(), (uid) -> new HomeWorld(this, owner));
+    }
+	
+	public void registerGcgWorld(GcgWorld gcgWorld) {
+        this.getGcgWorlds().put(gcgWorld.getOwnerUid(), gcgWorld);
+        this.registerWorld(gcgWorld);
     }
 
     public void start() {

@@ -323,6 +323,8 @@ public class AbilityModifier implements Serializable {
         public String abilityFormula;
         public String srcTarget, dstTarget;
         public String srcKey, dstKey;
+        public DynamicFloat minValue;
+        public DynamicFloat maxValue;
 
         public int skillID;
 
