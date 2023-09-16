@@ -393,6 +393,12 @@ tasks.register('generateHandbook') {
             return
         }
 
+        // Install dependencies before building.
+        exec {
+            workingDir 'src/handbook'
+            commandLine npm, 'install'
+        }
+
         // Build the handbook.
         //exec {
         //    workingDir 'src/handbook'
