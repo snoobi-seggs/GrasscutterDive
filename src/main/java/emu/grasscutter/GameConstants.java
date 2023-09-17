@@ -66,8 +66,8 @@ public final class GameConstants {
     public static final Map<Integer,List<Integer>> DEFAULT_CUSTOM_SCENE_TAGS = Map.ofEntries(
         Map.entry(3, List.of(152, 153, 1094, 1164, 1166)), // 3.1 event, 3.1 event,  3.0 Vana Dream, Desert Arena (XMSM_CWLTop), Desert Pyramid (CWL_Trans_02)
         Map.entry(4, List.of(106, 109, 117)),
-        Map.entry(9, IntStream.range(0, 3000).boxed().toList()),
-        Map.entry(10, IntStream.range(0, 3000).boxed().toList())
+        Map.entry(9, IntStream.range(1000, 1086).boxed().toList()),
+        Map.entry(10, IntStream.range(1261, 1269).boxed().toList())
     );
 
     public static final SparseSet ILLEGAL_WEAPONS = new SparseSet("""

@@ -22,8 +22,9 @@ public class PacketPlayerWorldSceneInfoListNotify extends BasePacket {
                         .addInfoList(
                                 PlayerWorldSceneInfo.newBuilder().setSceneId(1).setIsLocked(false).build());
 
-        // Iterate over all scenes
-        for (int scene : GameData.getSceneDataMap().keySet()) {
+        // Iterate over all scenes (1 - 10)
+        //for (int scene : GameData.getSceneDataMap().keySet()) {
+        for (int scene : IntStream.range(1, 11).boxed().toList()) {
             var worldInfoBuilder = PlayerWorldSceneInfo.newBuilder().setSceneId(scene).setIsLocked(false);
 
             /** Add scene-specific data */

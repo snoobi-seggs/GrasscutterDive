@@ -335,6 +335,7 @@ public final class PlayerProgressManager extends BasePlayerDataManager {
     public void addSceneTag(int sceneId, int sceneTagId) {
         player.getSceneTags().computeIfAbsent(sceneId, k -> new HashSet<>()).add(sceneTagId);
         player.sendPacket(new PacketPlayerWorldSceneInfoListNotify(player));
+        player.sendPacket(new PacketSceneDataNotify(player));
     }
 
     public void delSceneTag(int sceneId, int sceneTagId) {
@@ -345,6 +346,7 @@ public final class PlayerProgressManager extends BasePlayerDataManager {
         }
         player.getSceneTags().get(sceneId).remove(sceneTagId);
         player.sendPacket(new PacketPlayerWorldSceneInfoListNotify(player));
+        player.sendPacket(new PacketSceneDataNotify(player));
     }
 
     public boolean checkSceneTag(int sceneId, int sceneTagId) {

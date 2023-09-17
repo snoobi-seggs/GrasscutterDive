@@ -4,7 +4,7 @@ import emu.grasscutter.data.GameData;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.net.packet.*;
 import emu.grasscutter.net.proto.SceneDataNotifyOuterClass.SceneDataNotify;
-import java.util.Set;
+import java.util.*;
 
 public class PacketSceneDataNotify extends BasePacket {
 
@@ -20,6 +20,10 @@ public class PacketSceneDataNotify extends BasePacket {
                 proto.addLevelConfigNameList(map.get(Integer.parseInt(levelConfigId))
 												   .getLevelConfigName());
             }
+        }
+        
+        if (player.getSceneTags().get(player.getScene().getId()) != null) {
+            proto.addAllSceneTagIdList(new ArrayList<>(player.getSceneTags().get(player.getScene().getId()))); //cur scene only
         }
 
         this.setData(proto);
