@@ -341,6 +341,7 @@ public class EntityMonster extends GameEntity {
             .addAllAffixList(data.getAffix())
             .setAuthorityPeerId(this.getWorld().getHostPeerId())
             .setPoseId(this.getPoseId())
+            .setInitPoseId(this.getPoseId()) // apep needs this, wld assume rest also
             .setBlockId(this.getScene().getId())
             .setBornType(MonsterBornType.MONSTER_BORN_TYPE_DEFAULT);
 

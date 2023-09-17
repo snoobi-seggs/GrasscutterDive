@@ -343,9 +343,14 @@ public class AbilityModifier implements Serializable {
         public DynamicFloat valueRangeMax;
         public String overrideMapKey;
 
-        public int param1;
-        public int param2;
-        public int param3;
+        @SerializedName(value = "paramNum", alternate = {"KIDPODIIJLI", "LIAAKLHNPEN"})
+        public int paramNum;
+        @SerializedName(value = "param1", alternate = {"FDPBPIHKEGH", "GLJGFFMODKF"})
+        public DynamicFloat param1;
+        @SerializedName(value = "param2", alternate = {"FJCBPCIDMGJ", "LJNOHGPHNMK"})
+        public DynamicFloat param2;
+        @SerializedName(value = "param3", alternate = {"NDCPJDDPIMD", "DGNDNHKBAKF"})
+        public DynamicFloat param3;
 
         public String funcName;
         public LuaCallType luaCallType;

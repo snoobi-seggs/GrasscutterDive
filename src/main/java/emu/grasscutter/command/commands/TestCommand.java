@@ -10,6 +10,7 @@ import emu.grasscutter.game.props.*;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.net.proto.ChatInfoOuterClass.ChatInfo.*;
 import emu.grasscutter.net.proto.*;
+import emu.grasscutter.utils.Utils;
 import java.util.List;
 
 @Command(
@@ -76,6 +77,10 @@ public final class TestCommand implements CommandHandler {
 					CommandHandler.sendMessage(sender, "INVALID STAT ARG");
 				}
 			}
+            case "hash" -> {
+                String abilityName = args.get(1);
+                CommandHandler.sendMessage(sender, abilityName + " -> " + String.valueOf(Utils.abilityHash(abilityName)));
+            }
 			default -> {
 				CommandHandler.sendMessage(sender, "NOT DEFINED TEST COMM NAME");
 			}
