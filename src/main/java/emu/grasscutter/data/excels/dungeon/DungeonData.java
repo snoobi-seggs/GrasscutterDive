@@ -6,6 +6,7 @@ import emu.grasscutter.game.dungeons.enums.*;
 import emu.grasscutter.game.world.Position;
 import emu.grasscutter.scripts.data.SceneMeta;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 @ResourceType(name = "DungeonExcelConfigData.json")
@@ -32,6 +33,7 @@ public class DungeonData extends GameResource {
     @Getter private int statueCostID;
     @Getter private int statueCostCount;
     @Getter private int statueDrop;
+    @Getter private Map<String, Integer> levelConfigMap; // DungeonLevelEntityConfigData -> %chance? idk
 
     // not part of DungeonExcelConfigData
     @Getter private RewardPreviewData rewardPreviewData;

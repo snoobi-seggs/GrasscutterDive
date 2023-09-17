@@ -238,6 +238,9 @@ public final class GameData {
             new Int2ObjectOpenHashMap<>();
 
     @Getter
+    private static final Int2ObjectMap<DungeonLevelEntityConfigData> dungeonLevelEntityConfigDataMap = new Int2ObjectOpenHashMap<>();
+
+    @Getter
     private static final Int2ObjectMap<EnvAnimalGatherConfigData> envAnimalGatherConfigDataMap =
             new Int2ObjectOpenHashMap<>();
 

@@ -106,7 +106,15 @@ public final class RegionHandler implements Router {
         var hiddenIcons = new JsonArray();
         hiddenIcons.add(40);
         var codeSwitch = new JsonArray();
-        codeSwitch.add(3628);
+        codeSwitch.add(3628); //FromXmlString RSA
+        //codeSwitch.add(2320);
+        //codeSwitch.add(2337);
+        //codeSwitch.add(2646);
+        //codeSwitch.add(2742);
+        //codeSwitch.add(2753);
+        //codeSwitch.add(2823);
+        //codeSwitch.add(3063);
+        //codeSwitch.add(3257);
 
         // Create a config object.
         var customConfig = new JsonObject();
