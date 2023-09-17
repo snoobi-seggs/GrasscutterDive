@@ -4,7 +4,8 @@ import emu.grasscutter.game.world.Position;
 import emu.grasscutter.utils.Utils;
 import emu.grasscutter.utils.objects.SparseSet;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.stream.IntStream;
 
 public final class GameConstants {
     public static String VERSION = "4.0.0";
@@ -36,48 +37,39 @@ public final class GameConstants {
         "GrapplingHookSkill_Ability",
         "SceneAbility_DiveVolume",
         "Avatar_PlayerBoy_DiveStamina_Reduction",
-		
-		// Team
-		"Ability_Avatar_Dive_Team", //(THIS SHLD HAVE BEEN IN TEAM)
-		// Crab Shield
-		"Ability_Avatar_Dive_CrabShield",
-		"Avatar_Absorb_TrackingMissile",
-		// Seal Echo
-		"Ability_Avatar_Dive_SealEcho",
-		// Sword Fish 2 charge thingy
-		"Avatar_Absorb_SwordFishSlash",
-		// Flat fish thingy
-		"Ability_Avatar_Dive_Seahorse_Spray_Baihe",
-		
-		// TEST NADA
-		//"Monster_Nada_MuteFollowEffect",
-		//"Gagana_GrapplingHookSkill",
-		//"Gagana_AvatarAimShoot",
-		//"Monster_Nada_ForceAvatarExitFocus",
-		
-		// Sumeru mushroom jump
-		"Avatar_Trampoline_Jump_Controller",
 
-		// Activity
-		"ActivityAbility_Absorb_Shoot",
-		"Activity_MagicWave_SkillButton"
+        // Team
+        "Ability_Avatar_Dive_Team", //(THIS SHLD HAVE BEEN IN TEAM)
+        // Crab Shield
+        "Ability_Avatar_Dive_CrabShield",
+        "Avatar_Absorb_TrackingMissile",
+        // Seal Echo
+        "Ability_Avatar_Dive_SealEcho",
+        // Sword Fish 2 charge thingy
+        "Avatar_Absorb_SwordFishSlash",
+        // Flat fish thingy
+        "Ability_Avatar_Dive_Seahorse_Spray_Baihe",
+        
+        // Sumeru mushroom jump
+        "Avatar_Trampoline_Jump_Controller",
+        
+        // Activity
+        "ActivityAbility_Absorb_Shoot",
+        "Activity_MagicWave_SkillButton"
     };
 	
 	public static final String[] DEFAULT_TEAM_ABILITY_STRINGS = {
-		//TEST NADA
-		//"Monster_Nada_CreateGagana",
-		//"Gagana_ActivateCircle_Electric",
-		//"Gagana_ActivateCircle_Fire",
-		//"Gagana_ActivateCircle_Ice",
-		//"Gagana_ActivateCircle_Wind",
-		//"Gagana_ActivateCircle_Water",
-		//"Gagana_ActivateCircle_Electric_Mirror",
-		//"Gagana_ActivateAimShoot",
-		
-		//DIVING
-		"Ability_Avatar_Dive_Team"	//(FONTAINE)
+        //DIVING
+        "Ability_Avatar_Dive_Team" // (FONTAINE)
 	};
-	
+
+    public static final Map<Integer,List<Integer>> DEFAULT_CUSTOM_SCENE_TAGS = Map.ofEntries(
+        Map.entry(3, List.of(152, 153, 1094, 1164, 1166)), // 3.1 event, 3.1 event,  3.0 Vana Dream, Desert Arena (XMSM_CWLTop), Desert Pyramid (CWL_Trans_02)
+        Map.entry(4, List.of(106, 109, 117)),
+        Map.entry(9, IntStream.range(0, 3000).boxed().toList()),
+        Map.entry(10, IntStream.range(0, 3000).boxed().toList())
+    );
+
     public static final SparseSet ILLEGAL_WEAPONS = new SparseSet("""
         10000-10008, 11411, 11506-11508, 12505, 12506, 12508, 12509,
         13503, 13506, 14411, 14503, 14505, 14508, 15504-15506
