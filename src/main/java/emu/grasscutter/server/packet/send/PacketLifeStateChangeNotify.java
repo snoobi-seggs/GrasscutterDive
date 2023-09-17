@@ -14,6 +14,7 @@ public class PacketLifeStateChangeNotify extends BasePacket {
                 LifeStateChangeNotify.newBuilder()
                         .setEntityId(target.getId())
                         .setLifeState(lifeState.getValue())
+                        .setMoveReliableSeq(target.getLastMoveReliableSeq())
                         .build();
 
         this.setData(proto);
@@ -27,6 +28,7 @@ public class PacketLifeStateChangeNotify extends BasePacket {
                         .setEntityId(target.getId())
                         .setLifeState(lifeState.getValue())
                         .setSourceEntityId(attacker.getId())
+                        .setMoveReliableSeq(target.getLastMoveReliableSeq())
                         .build();
 
         this.setData(proto);
@@ -40,6 +42,7 @@ public class PacketLifeStateChangeNotify extends BasePacket {
                         .setEntityId(target.getId())
                         .setLifeState(lifeState.getValue())
                         .setSourceEntityId(attackerId)
+                        .setMoveReliableSeq(target.getLastMoveReliableSeq())
                         .build();
 
         this.setData(proto);
@@ -67,6 +70,7 @@ public class PacketLifeStateChangeNotify extends BasePacket {
         }
         proto.setAttackTag(attackTag);
         proto.setDieType(dieType);
+        proto.setMoveReliableSeq(entity.getLastMoveReliableSeq());
 
         this.setData(proto.build());
     }
