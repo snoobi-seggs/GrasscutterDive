@@ -8,6 +8,12 @@ public class PacketCutsceneBeginNotify extends BasePacket {
     public PacketCutsceneBeginNotify(int cutsceneId) {
         super(PacketOpcodes.CutSceneBeginNotify);
 
-        setData(CutSceneBeginNotify.newBuilder().setCutsceneId(cutsceneId));
+        this.setData(CutSceneBeginNotify.newBuilder().setCutsceneId(cutsceneId));
+    }
+    
+    public PacketCutsceneBeginNotify(int cutsceneId, boolean isWaitOthers) {
+        super(PacketOpcodes.CutSceneBeginNotify);
+
+        this.setData(CutSceneBeginNotify.newBuilder().setCutsceneId(cutsceneId).setIsWaitOthers(isWaitOthers));
     }
 }

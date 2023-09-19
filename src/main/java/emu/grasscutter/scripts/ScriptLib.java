@@ -1155,10 +1155,11 @@ public class ScriptLib {
         return 0;
     }
 
-    public int PlayCutScene(int cutsceneId, int var2){
-        logger.warn("[LUA] Call unimplemented PlayCutScene with {} {}", cutsceneId, var2);
-        sceneScriptManager.get().getScene().broadcastPacket(new PacketCutsceneBeginNotify(cutsceneId));
-        //TODO implement
+    public int PlayCutScene(int cutsceneId, int isWaitOthers){
+        logger.warn("[LUA] Call PlayCutScene with {} {}", cutsceneId, isWaitOthers);
+        sceneScriptManager.get().getScene().broadcastPacket(new PacketCutsceneBeginNotify(cutsceneId, isWaitOthers == 1 ? true : false));
+        //TLDR: isWaitOthers means cutscene skip will now send a CutsceneFinishNotify to server, then server will rsp with CutsceneEndNotify w the same field.
+        //This is used in apep 2nd phase as the music needs to sync.
         return 0;
     }
 

@@ -75,7 +75,12 @@ public final class ActionServerLuaCall extends AbilityActionHandler {
             args.setParam1((int) arg1);
             args.setParam2((int) arg2);
             args.setParam3((int) arg3);
-            luaFunction.invoke(new LuaValue[] {ScriptLoader.getScriptLibLua(), CoerceJavaToLua.coerce(args)});
+            
+            // Call Here
+            // (IT IS POSSIBLE FOR SOME FUNCS TO ONLY HAVE CONTEXT PARAM AND NO EVT)
+            // (IT IS ALSO POSSIBLE FOR SOME ABILITY_DATA TO HAVE CALLPARAM LIST INSTEAD OF PARAM 1 2 3) [I lazi code this]
+            //luaFunction.invoke(new LuaValue[] {ScriptLoader.getScriptLibLua(), CoerceJavaToLua.coerce(args)});
+            luaFunction.call(ScriptLoader.getScriptLibLua(), CoerceJavaToLua.coerce(args));
 
             return true;
         } catch (Exception exception) {
