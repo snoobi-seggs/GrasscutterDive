@@ -6,8 +6,11 @@ import emu.grasscutter.utils.FileUtils;
 import io.javalin.Javalin;
 import io.javalin.http.ContentType;
 import io.javalin.json.JavalinGson;
+import org.eclipse.jetty.server.HttpConfiguration;
+import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.server.ServerConnector;
+import org.eclipse.jetty.server.SecureRequestCustomizer;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import java.io.*;
@@ -107,7 +110,11 @@ public final class HttpServer {
                     Grasscutter.getLogger().warn(translate("messages.dispatch.keystore.general_error"), exception);
                 }
             } finally {
-                serverConnector = new ServerConnector(server, sslContextFactory);
+                HttpConfiguration httpsConfig = new HttpConfiguration();
+                SecureRequestCustomizer src = new SecureRequestCustomizer();
+                src.setSniHostCheck(false);
+                httpsConfig.addCustomizer(src);
+                serverConnector = new ServerConnector(server, sslContextFactory, new HttpConnectionFactory(httpsConfig));
             }
         }
 
