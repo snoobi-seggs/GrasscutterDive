@@ -118,7 +118,7 @@ public class MonsterData extends GameResource {
             case FIGHT_PROP_ROCK_SUB_HURT -> this.rockSubHurt;
             case FIGHT_PROP_ICE_SUB_HURT -> this.iceSubHurt;
             case FIGHT_PROP_BASE_ELEM_REACT_CRITICAL -> 0f; // 3.2 NAHIDA C2 caused this (3045)
-            case FIGHT_PROP_BASE_ELEM_REACT_CRITICAL_HURT -> 100f; // 3.2 NAHIDA C2 caused this (3046)
+            case FIGHT_PROP_BASE_ELEM_REACT_CRITICAL_HURT -> 1f; // 3.2 NAHIDA C2 caused this (3046)
             default -> 0f;
         };
     }
