@@ -24,7 +24,9 @@ public class MonsterData extends GameResource {
                     FightProperty.FIGHT_PROP_GRASS_SUB_HURT,
                     FightProperty.FIGHT_PROP_WIND_SUB_HURT,
                     FightProperty.FIGHT_PROP_ROCK_SUB_HURT,
-                    FightProperty.FIGHT_PROP_ICE_SUB_HURT);
+                    FightProperty.FIGHT_PROP_ICE_SUB_HURT,
+                    FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL,
+                    FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL_HURT);
 
     @Getter(onMethod_ = @Override)
     private int id;
@@ -115,6 +117,8 @@ public class MonsterData extends GameResource {
             case FIGHT_PROP_WIND_SUB_HURT -> this.windSubHurt;
             case FIGHT_PROP_ROCK_SUB_HURT -> this.rockSubHurt;
             case FIGHT_PROP_ICE_SUB_HURT -> this.iceSubHurt;
+            case FIGHT_PROP_BASE_ELEM_REACT_CRITICAL -> 0f; // 3.2 NAHIDA C2 caused this (3045)
+            case FIGHT_PROP_BASE_ELEM_REACT_CRITICAL_HURT -> 100f; // 3.2 NAHIDA C2 caused this (3046)
             default -> 0f;
         };
     }
