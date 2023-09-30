@@ -5,8 +5,10 @@ import static emu.grasscutter.utils.lang.Language.translate;
 import emu.grasscutter.Grasscutter;
 import emu.grasscutter.command.Command;
 import emu.grasscutter.command.CommandHandler;
+import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.*;
+import emu.grasscutter.game.world.*;
 import emu.grasscutter.server.packet.send.*;
 import emu.grasscutter.net.proto.ChatInfoOuterClass.ChatInfo.*;
 import emu.grasscutter.net.proto.*;
@@ -19,6 +21,8 @@ import java.util.List;
         permission = "server.stop",
         targetRequirement = Command.TargetRequirement.NONE)
 public final class TestCommand implements CommandHandler {
+    private static Position pos = null;
+    
     @Override
     public void execute(Player sender, Player targetPlayer, List<String> args) {
 		
@@ -81,9 +85,28 @@ public final class TestCommand implements CommandHandler {
                 String abilityName = args.get(1);
                 CommandHandler.sendMessage(sender, abilityName + " -> " + String.valueOf(Utils.abilityHash(abilityName)));
             }
+            case "rcrit" -> {
+                pos = targetPlayer.getPosition();
+                List<GameEntity> monsters = targetPlayer.getScene().getEntities().values().stream()
+						.filter(entity -> entity instanceof EntityMonster)
+                        .filter(entity -> isWithinRange(entity, 15d))
+						.toList();
+                monsters.forEach(m -> {
+                    m.setFightProperty(FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL, 1f);
+                    m.getScene().broadcastPacket(new PacketEntityFightPropUpdateNotify(m, FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL));
+                });
+            }
 			default -> {
 				CommandHandler.sendMessage(sender, "NOT DEFINED TEST COMM NAME");
 			}
 		}
+    }
+    
+    private boolean isWithinRange(GameEntity entity, double range) {
+        if (pos.computeDistance(entity.getPosition()) < range) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

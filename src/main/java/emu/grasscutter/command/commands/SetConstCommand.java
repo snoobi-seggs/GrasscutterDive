@@ -10,7 +10,7 @@ import java.util.List;
 
 @Command(
         label = "setConst",
-        aliases = {"setconstellation"},
+        aliases = {"setconstellation", "sc"},
         usage = {"<constellation level> [all]"},
         permission = "player.setconstellation",
         permissionTargeted = "player.setconstellation.others")
