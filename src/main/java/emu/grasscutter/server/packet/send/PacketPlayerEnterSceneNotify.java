@@ -9,6 +9,8 @@ import emu.grasscutter.net.packet.*;
 import emu.grasscutter.net.proto.EnterTypeOuterClass.EnterType;
 import emu.grasscutter.net.proto.PlayerEnterSceneNotifyOuterClass.PlayerEnterSceneNotify;
 import emu.grasscutter.utils.Utils;
+import emu.grasscutter.Grasscutter;
+import java.util.*;
 
 public class PacketPlayerEnterSceneNotify extends BasePacket {
 
@@ -22,7 +24,10 @@ public class PacketPlayerEnterSceneNotify extends BasePacket {
         var proto =
                 PlayerEnterSceneNotify.newBuilder()
                         .setSceneId(player.getSceneId())
+                        .setPrevSceneId(player.getSceneId())    //new
                         .setPos(player.getPosition().toProto())
+                        .setPrevPos(player.getPosition().toProto()) //new
+                        .addAllSceneTagIdList(new ArrayList<>(player.getSceneTags().get(player.getScene().getId()) == null ? List.of() : player.getSceneTags().get(player.getScene().getId()))) //cur scene only
                         .setSceneBeginTime(System.currentTimeMillis())
                         .setType(EnterType.ENTER_TYPE_SELF)
                         .setTargetUid(player.getUid())
@@ -38,7 +43,7 @@ public class PacketPlayerEnterSceneNotify extends BasePacket {
                                         + (int) (System.currentTimeMillis() / 1000)
                                         + "-"
                                         + 18402);
-
+        Grasscutter.getLogger().warn(proto.toString());
         this.setData(proto);
     }
 
@@ -90,6 +95,7 @@ public class PacketPlayerEnterSceneNotify extends BasePacket {
                         .setWorldLevel(target.getWorld().getWorldLevel())
                         .setEnterReason(teleportProperties.getEnterReason().getValue())
                         .setWorldType(1)
+                        .addAllSceneTagIdList(new ArrayList<>(player.getSceneTags().get(player.getScene().getId()) == null ? List.of() : player.getSceneTags().get(player.getScene().getId()))) //cur scene only
                         .setSceneTransaction(
                                 teleportProperties.getSceneId()
                                         + "-"

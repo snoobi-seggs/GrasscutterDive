@@ -3,6 +3,7 @@ package emu.grasscutter.command.commands;
 import static emu.grasscutter.utils.lang.Language.translate;
 
 import emu.grasscutter.Grasscutter;
+import emu.grasscutter.GameConstants;
 import emu.grasscutter.command.Command;
 import emu.grasscutter.command.CommandHandler;
 import emu.grasscutter.game.entity.*;
@@ -17,7 +18,7 @@ import java.util.List;
 
 @Command(
         label = "test",
-        aliases = {"test"},
+        aliases = {"test", "tc"},
         permission = "server.stop",
         targetRequirement = Command.TargetRequirement.NONE)
 public final class TestCommand implements CommandHandler {
@@ -87,13 +88,29 @@ public final class TestCommand implements CommandHandler {
             }
             case "rcrit" -> {
                 pos = targetPlayer.getPosition();
+                List<FightProperty> changedFields = List.of(
+                    FightProperty.FIGHT_PROP_ELEM_REACT_CRITICAL,
+                    FightProperty.FIGHT_PROP_ELEM_REACT_CRITICAL_HURT,
+                    FightProperty.FIGHT_PROP_ELEM_REACT_SWIRL_CRITICAL,
+                    FightProperty.FIGHT_PROP_ELEM_REACT_SWIRL_CRITICAL_HURT,
+                    FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL,
+                    FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL_HURT
+                );
+
                 List<GameEntity> monsters = targetPlayer.getScene().getEntities().values().stream()
 						.filter(entity -> entity instanceof EntityMonster)
                         .filter(entity -> isWithinRange(entity, 15d))
 						.toList();
+
                 monsters.forEach(m -> {
-                    m.setFightProperty(FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL, 1f);
-                    m.getScene().broadcastPacket(new PacketEntityFightPropUpdateNotify(m, FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL));
+                    m.setFightProperty(FightProperty.FIGHT_PROP_ELEM_REACT_CRITICAL, 1f); // 3025
+                    m.setFightProperty(FightProperty.FIGHT_PROP_ELEM_REACT_CRITICAL_HURT, 1f); // 3025
+                    m.setFightProperty(FightProperty.FIGHT_PROP_ELEM_REACT_SWIRL_CRITICAL, 1f); // 3029
+                    m.setFightProperty(FightProperty.FIGHT_PROP_ELEM_REACT_SWIRL_CRITICAL_HURT, 1f); // 3030
+                    m.setFightProperty(FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL, 1f); // 3045
+                    m.setFightProperty(FightProperty.FIGHT_PROP_BASE_ELEM_REACT_CRITICAL_HURT, 1f); // 3046
+                    m.getScene().broadcastPacket(new PacketEntityFightPropUpdateNotify(m, changedFields));
+                    CommandHandler.sendMessage(sender, "Entity " + m.getId() + "REAXN CRIT SET TO 1");
                 });
             }
 			default -> {
