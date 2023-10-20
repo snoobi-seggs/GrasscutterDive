@@ -113,10 +113,30 @@ public final class TestCommand implements CommandHandler {
                     CommandHandler.sendMessage(sender, "Entity " + m.getId() + "REAXN CRIT SET TO 1");
                 });
             }
-			default -> {
-				CommandHandler.sendMessage(sender, "NOT DEFINED TEST COMM NAME");
-			}
-		}
+            case "addbuff" -> {
+                int buffId = 600301; //sorush buff default
+                try {
+                    buffId = Integer.parseInt(args.get(1));
+                } catch (Exception e) {
+                    CommandHandler.sendMessage(sender, "ARGS ERROR " + e.toString());
+                }
+                targetPlayer.getBuffManager().addBuff(buffId);
+                CommandHandler.sendMessage(sender, "SUCC ADD BUFFID " + String.valueOf(buffId));
+            }
+            case "removebuff" -> {
+                int buffId = 600301; //sorush buff default
+                try {
+                    buffId = Integer.parseInt(args.get(1));
+                } catch (Exception e) {
+                    CommandHandler.sendMessage(sender, "ARGS ERROR " + e.toString());
+                }
+                targetPlayer.getBuffManager().removeBuff(buffId);
+                CommandHandler.sendMessage(sender, "SUCC REMV BUFFID " + String.valueOf(buffId));
+            }
+            default -> {
+                CommandHandler.sendMessage(sender, "NOT DEFINED TEST COMM NAME");
+            }
+        }
     }
     
     private boolean isWithinRange(GameEntity entity, double range) {

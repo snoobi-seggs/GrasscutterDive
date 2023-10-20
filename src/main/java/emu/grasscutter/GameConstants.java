@@ -60,7 +60,8 @@ public final class GameConstants {
 	
 	public static final String[] DEFAULT_TEAM_ABILITY_STRINGS = {
         //DIVING
-        "Ability_Avatar_Dive_Team" // (FONTAINE)
+        "Ability_Avatar_Dive_Team", // (FONTAINE)
+        "SceneObj_Toys_Sorush_Hat"
 	};
 
     public static final Map<Integer,List<Integer>> DEFAULT_CUSTOM_SCENE_TAGS = Map.ofEntries(

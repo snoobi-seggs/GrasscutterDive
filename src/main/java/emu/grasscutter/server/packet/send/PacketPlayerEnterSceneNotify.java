@@ -43,7 +43,7 @@ public class PacketPlayerEnterSceneNotify extends BasePacket {
                                         + (int) (System.currentTimeMillis() / 1000)
                                         + "-"
                                         + 18402);
-        Grasscutter.getLogger().warn(proto.toString());
+        //Grasscutter.getLogger().warn(proto.toString());
         this.setData(proto);
     }
 

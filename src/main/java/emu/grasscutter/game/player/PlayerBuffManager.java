@@ -121,6 +121,11 @@ public final class PlayerBuffManager extends BasePlayerManager {
             duration = buffData.getTime();
         }
 
+        // If Buff Time is still -1, it lasts forever until removed or overwritten.
+        if (duration == -1f) {
+            duration = 1000f;
+        }
+
         // Don't add buff if duration is equal or less than 0
         if (duration <= 0) {
             return success;
@@ -203,6 +208,10 @@ public final class PlayerBuffManager extends BasePlayerManager {
         }
 
         public int getGroupId() {
+            // fix groupId 0 for some buffs
+            if (getBuffData().getGroupId() == 0) {
+                return getBuffData().getId();
+            }
             return getBuffData().getGroupId();
         }
 

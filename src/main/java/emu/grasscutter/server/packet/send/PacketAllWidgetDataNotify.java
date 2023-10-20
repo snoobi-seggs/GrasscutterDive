@@ -38,12 +38,36 @@ public class PacketAllWidgetDataNotify extends BasePacket {
                             .setIsActive(true)
                             .setMaterialId(player.getWidgetId())
                             .build());
-
+            // attach pet (220014, 220015, 220016, 220023, 220038, 220045, 220062, 220074, 220079)
             proto.addSlotList(
                     WidgetSlotDataOuterClass.WidgetSlotData.newBuilder()
                             .setTag(WidgetSlotTagOuterClass.WidgetSlotTag.WIDGET_SLOT_TAG_ATTACH_AVATAR)
+                            .setIsActive(true)
+                            .setMaterialId(player.getWidgetId())
                             .build());
         }
+        
+        // 4.0 only
+        //proto.setHALAOGOBMKJ(1); // either activeWidgetId OR activeQuickSwapSlotId
+        //proto.addAllEMPBLGKLCOA(List.of(player.getWidgetId(),220044,220051,220025)); // test 4 quick swap list
+        //proto.setNNPMMJCEJAO(EPIAFADAJANOuterClass.EPIAFADAJAN.newBuilder()
+        //                        .setPos(VectorOuterClass.Vector.newBuilder().setX(0).setY(0).setZ(0))
+        //                        .setRot(VectorOuterClass.Vector.newBuilder().setX(0).setY(0).setZ(0))
+        //                        .setState(DIIHAAGDDJKOuterClass.DIIHAAGDDJK.DIIHAAGDDJK_WispCageStateNotTakeReward)
+        //                        .setSceneId(3)
+        //                        .setGadgetEntityId(67108910)
+        //                        .setGIMDMFFKJKK(70500059)
+        //                        .build()); // crystalfly trap 220088
+        proto.addCoolDownGroupDataList(WidgetCoolDownDataOuterClass.WidgetCoolDownData.newBuilder()
+                                        .setId(36)
+                                        .setCoolDownTime((int) 1697495525547L)
+                                        .setIsSuccess(true)
+                                        .build()); //sorush
+        proto.addCoolDownGroupDataList(WidgetCoolDownDataOuterClass.WidgetCoolDownData.newBuilder()
+                                        .setId(16)
+                                        .setCoolDownTime((int) 1697495525547L)
+                                        .setIsSuccess(true)
+                                        .build()); //wind-blessed harpestum
 
         AllWidgetDataNotify protoData = proto.build();
 

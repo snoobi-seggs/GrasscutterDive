@@ -114,6 +114,7 @@ public class AbilityModifier implements Serializable {
             EnableAvatarMoveOnWater,
             EnableBulletCollisionPluginTrigger,
             EnableGadgetIntee,
+            EnableHDMesh, //sorush Vehicle_Sorush_Normal_ServerBuff_Handler
             EnableHeadControl,
             EnableHitBoxByName,
             EnableMainInterface,

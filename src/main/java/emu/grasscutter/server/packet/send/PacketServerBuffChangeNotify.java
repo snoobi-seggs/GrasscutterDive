@@ -1,11 +1,14 @@
 package emu.grasscutter.server.packet.send;
 
+import emu.grasscutter.Grasscutter;
+import emu.grasscutter.game.entity.*;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.player.PlayerBuffManager.PlayerBuff;
 import emu.grasscutter.net.packet.*;
 import emu.grasscutter.net.proto.ServerBuffChangeNotifyOuterClass.ServerBuffChangeNotify;
 import emu.grasscutter.net.proto.ServerBuffChangeNotifyOuterClass.ServerBuffChangeNotify.ServerBuffChangeType;
 import java.util.Collection;
+import java.util.List;
 import java.util.stream.Stream;
 
 public class PacketServerBuffChangeNotify extends BasePacket {
@@ -29,9 +32,17 @@ public class PacketServerBuffChangeNotify extends BasePacket {
         player.getTeamManager().getActiveTeam().stream()
                 .mapToLong(entity -> entity.getAvatar().getGuid())
                 .forEach(proto::addAvatarGuidList);
+                
+        //test sorush
+        List<Integer> vehicleIds = player.getScene().getEntities().values().stream()
+                        .filter(entity -> entity instanceof EntityVehicle)
+                        .map(entity -> entity.getId())
+                        .toList();
+        //proto.addAllEntityIdList(vehicleIds);
 
         proto.setServerBuffChangeType(changeType);
         buffs.map(PlayerBuff::toProto).forEach(proto::addServerBuffList);
+        Grasscutter.getLogger().warn(proto.toString());
 
         this.setData(proto);
     }

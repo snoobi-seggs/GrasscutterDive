@@ -57,4 +57,14 @@ public class PacketCreateVehicleRsp extends BasePacket {
 
         this.setData(proto.build());
     }
+
+    //test Sorush
+    public PacketCreateVehicleRsp(int vehicleId, int entityId) {
+        super(PacketOpcodes.CreateVehicleRsp);
+        CreateVehicleRsp proto = CreateVehicleRsp.newBuilder()
+                                    .setVehicleId(vehicleId)
+                                    .setEntityId(entityId)
+                                    .build();
+        this.setData(proto);
+    }
 }

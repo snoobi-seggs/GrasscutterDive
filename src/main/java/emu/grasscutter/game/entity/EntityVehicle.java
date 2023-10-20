@@ -2,6 +2,7 @@ package emu.grasscutter.game.entity;
 
 import emu.grasscutter.data.GameData;
 import emu.grasscutter.data.binout.config.ConfigEntityGadget;
+import emu.grasscutter.data.binout.config.fields.ConfigAbilityData;
 import emu.grasscutter.data.excels.GadgetData;
 import emu.grasscutter.game.player.Player;
 import emu.grasscutter.game.props.*;
@@ -55,6 +56,24 @@ public class EntityVehicle extends EntityBaseGadget {
         }
 
         fillFightProps(configGadget);
+
+        this.initAbilities(); // TODO: move this
+    }
+
+    private void addConfigAbility(ConfigAbilityData abilityData) {
+        var data = GameData.getAbilityData(abilityData.getAbilityName());
+        if (data != null)
+            this.getScene().getWorld().getHost().getAbilityManager().addAbilityToEntity(this, data);
+    }
+
+    @Override
+    public void initAbilities() {
+        // TODO: handle pre-dynamic, static and dynamic here
+        if (this.configGadget != null && this.configGadget.getAbilities() != null) {
+            for (var ability : this.configGadget.getAbilities()) {
+                this.addConfigAbility(ability);
+            }
+        }
     }
 
     @Override
@@ -103,6 +122,7 @@ public class EntityVehicle extends EntityBaseGadget {
                         .addAnimatorParaList(AnimatorParameterValueInfoPair.newBuilder())
                         .setGadget(gadgetInfo)
                         .setEntityAuthorityInfo(authority)
+                        .setName(this.getGadgetId() == 45001001 ? "Gadget_Vehicle_45001001" : "Gadget_Vehicle_45002002")
                         .setLifeState(1);
 
         PropPair pair =
@@ -117,9 +137,9 @@ public class EntityVehicle extends EntityBaseGadget {
         return entityInfo.build();
     }
 
-    @Override
-    public void initAbilities() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'initAbilities'");
-    }
+    //@Override
+    //public void initAbilities() {
+    //    // TODO Auto-generated method stub
+    //    throw new UnsupportedOperationException("Unimplemented method 'initAbilities'");
+    //}
 }

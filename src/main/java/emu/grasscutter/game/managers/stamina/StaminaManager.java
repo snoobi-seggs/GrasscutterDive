@@ -48,7 +48,8 @@ public class StaminaManager extends BasePlayerManager {
             MotionState.MOTION_STATE_SKIFF_BOARDING, // NOT OBSERVED even when boarding
             MotionState.MOTION_STATE_SKIFF_DASH, // sustained, observed with waverider entity ID.
             MotionState.MOTION_STATE_SKIFF_NORMAL, // sustained, OBSERVED when both normal and dashing
-            MotionState.MOTION_STATE_SKIFF_POWERED_DASH // sustained, recover
+            MotionState.MOTION_STATE_SKIFF_POWERED_DASH, // sustained, recover
+            MotionState.MOTION_STATE_SORUSH_NORMAL // SORUSH smth
         ));
         put("STANDBY", Set.of(
             MotionState.MOTION_STATE_DANGER_STANDBY_MOVE, // sustained, recover
