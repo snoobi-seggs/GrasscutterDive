@@ -1450,14 +1450,6 @@ public class Player implements PlayerHook, FieldFetch {
         this.getPlayerProgress().setPlayer(this); // Add reference to the player.
     }
 
-    /**
-     * Invoked when the player selects their avatar.
-     */
-    public void onPlayerBorn() {
-        Grasscutter.getThreadPool().submit(
-            this.getQuestManager()::onPlayerBorn);
-    }
-
     public void onLogin() {
         // Quest - Commented out because a problem is caused if you log out while this quest is active
         /*
@@ -1612,6 +1604,31 @@ public class Player implements PlayerHook, FieldFetch {
         //Note: DON'T DELETE BY UID,BECAUSE THERE ARE MULTIPLE SAME UID PLAYERS WHEN DUPLICATED LOGIN!
         //so I decide to delete by object rather than uid
         getServer().getPlayers().values().removeIf(player1 -> player1 == this);
+    }
+
+    public void unfreezeUnlockedScenePoints(int sceneId) {
+        // Unfreeze previously unlocked scene points. For example,
+        // the first weapon mats domain needs some script interaction
+        // to unlock. It needs to be unfrozen when GetScenePointReq
+        // comes in to be interactable again.
+        GameData.getScenePointEntryMap().values().stream()
+                .filter(scenePointEntry ->
+                        // Note: Only DungeonEntry scene points need to be unfrozen
+                        scenePointEntry.getPointData().getType().equals("DungeonEntry")
+                        // groupLimit says this scene point needs to be unfrozen
+                        && scenePointEntry.getPointData().isGroupLimit())
+                .forEach(scenePointEntry -> {
+                        // If this is a previously unlocked scene point,
+                        // send unfreeze packet.
+                        val pointId = scenePointEntry.getPointData().getId();
+                        if (unlockedScenePoints.get(sceneId).contains(pointId)) {
+                            this.sendPacket(new PacketUnfreezeGroupLimitNotify(pointId, sceneId));
+                        }
+                });
+    }
+
+    public void unfreezeUnlockedScenePoints() {
+        unlockedScenePoints.keySet().forEach(sceneId -> unfreezeUnlockedScenePoints(sceneId));
     }
 
     public int getLegendaryKey() {

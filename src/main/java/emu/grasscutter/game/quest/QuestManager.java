@@ -221,14 +221,11 @@ public final class QuestManager extends BasePlayerManager {
         this.player.sendPacket(new PacketGivingRecordNotify(this.getGivingRecords()));
     }
 
-    public void onPlayerBorn() {
+    public void onLogin() {
         if (this.isQuestingEnabled()) {
             this.enableQuests();
             this.sendGivingRecords();
         }
-    }
-
-    public void onLogin() {
 
         List<GameMainQuest> activeQuests = getActiveMainQuests();
         List<GameQuest> activeSubs = new ArrayList<>(activeQuests.size());
@@ -298,6 +295,17 @@ public final class QuestManager extends BasePlayerManager {
     }
 
     public void enableQuests() {
+        GameData.getBeginCondQuestMap()
+                .keySet()
+                .forEach(
+                        x -> {
+                            if (x.contains("QUEST_COND_STATE_NOT_EQUAL"))
+                                this.triggerEvent(
+                                        QuestCond.QUEST_COND_STATE_NOT_EQUAL, null, Integer.parseInt(x.substring(26)));
+                            if (x.contains("QUEST_COND_STATE_EQUAL"))
+                                this.triggerEvent(
+                                        QuestCond.QUEST_COND_STATE_EQUAL, null, Integer.parseInt(x.substring(22)));
+                        });
         this.triggerEvent(QuestCond.QUEST_COND_NONE, null, 0);
         this.triggerEvent(QuestCond.QUEST_COND_PLAYER_LEVEL_EQUAL_GREATER, null, 1);
     }

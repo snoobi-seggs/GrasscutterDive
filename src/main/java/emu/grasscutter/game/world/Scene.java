@@ -158,7 +158,7 @@ public class Scene {
         return entity;
     }
 
-    public GameEntity getEntityByConfigId(int configId) {
+    public GameEntity getFirstEntityByConfigId(int configId) {
         return this.entities.values().stream()
                 .filter(x -> x.getConfigId() == configId)
                 .findFirst()
@@ -596,6 +596,13 @@ public class Scene {
                 });
 
         blossomManager.onTick();
+
+        // Should be OK to check only player 0,
+        // as no other players could enter Tower
+        var towerManager = getPlayers().get(0).getTowerManager();
+        if (towerManager != null) {
+            towerManager.onTick();
+        }
 
         this.checkNpcGroup();
 
